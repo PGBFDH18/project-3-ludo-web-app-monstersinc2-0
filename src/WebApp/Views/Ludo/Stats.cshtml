@@ -1,0 +1,27 @@
+﻿@{ var winners = new Dictionary<int, string> {
+       [1] = "Nordeke", [2] = "Ghassan", [3] = "Benjamin", [4] = "Victor", [5] = "Stephan"
+    };}
+@{
+    ViewData["Title"] = "Stats";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Stats</h1>
+
+<table class="table table-dark">
+    <thead>
+        <tr>
+            <th scope="col">GameID</th>
+            <th scope="col">Winner</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pair in winners)
+        {
+            <tr class="table-light">
+                <th scope="row">@pair.Key</th>
+                <td>@pair.Value</td>
+            </tr>
+        }
+    </tbody>
+</table> 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models;
 
@@ -10,6 +11,8 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        List<Guid> sessionIds = new List<Guid> { };
+
         public IActionResult Index()
         {
             return View();

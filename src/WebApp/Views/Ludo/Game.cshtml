@@ -1,4 +1,13 @@
-﻿
+﻿@{ int[] p1Piecepositions = new int[] { 0, 0, 0, 0 }; }
+@{ int[] p2Piecepositions = new int[] { 0, 0, 0, 0 }; }
+@{ int[] p3Piecepositions = new int[] { 0, 0, 0, 0 }; }
+@{ int[] p4Piecepositions = new int[] { 0, 0, 0, 0 }; }
+
+@{ int[] p1Pattern = new int[] { 0, 55, 56, 57, 58, 59, 60, 18, 17, 16,
+15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
+38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
+23, 24, 72, 71, 70, 69, 68, 67, 61, 62, 63, 64, 65, 66};}
+
 @{
     Layout = null;
 }
@@ -28,141 +37,163 @@
     </div>
     <div class="board">
         <div class="wing" id="leftWing">
-            <div class="field"></div>
-            <div class="field player2"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field player2"></div>
-            <div class="field player2"></div>
-            <div class="field player2"></div>
-            <div class="field player2"></div>
-            <div class="field player2"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
+            <div class="field">1</div>
+            <div class="field player2">2</div>
+            <div class="field">3</div>
+            <div class="field">4</div>
+            <div class="field">5</div>
+            <div class="field">6</div>
+            <div class="field">7</div>
+            <div class="field player2">8</div>
+            <div class="field player2">9</div>
+            <div class="field player2">10</div>
+            <div class="field player2">11</div>
+            <div class="field player2">12</div>
+            <div class="field">13</div>
+            <div class="field">14</div>
+            <div class="field">15</div>
+            <div class="field">16</div>
+            <div class="field">17</div>
+            <div class="field">18</div>
         </div>
         <div class="wing" id="rightWing">
-            <div class="field"></div>
-            <div class="field player3"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field player3"></div>
-            <div class="field player3"></div>
-            <div class="field player3"></div>
-            <div class="field player3"></div>
-            <div class="field player3"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
+            <div class="field">19</div>
+            <div class="field player3">20</div>
+            <div class="field">21</div>
+            <div class="field">22</div>
+            <div class="field">23</div>
+            <div class="field">24</div>
+            <div class="field">25</div>
+            <div class="field player3">26</div>
+            <div class="field player3">27</div>
+            <div class="field player3">28</div>
+            <div class="field player3">29</div>
+            <div class="field player3">30</div>
+            <div class="field">31</div>
+            <div class="field">32</div>
+            <div class="field">33</div>
+            <div class="field">34</div>
+            <div class="field">35</div>
+            <div class="field">36</div>
         </div>
         <div class="wing" id="topWing">
-            <div class="field"></div>
-            <div class="field player4"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field player4"></div>
-            <div class="field player4"></div>
-            <div class="field player4"></div>
-            <div class="field player4"></div>
-            <div class="field player4"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
+            <div class="field">37</div>
+            <div class="field player4">38</div>
+            <div class="field">39</div>
+            <div class="field">40</div>
+            <div class="field">41</div>
+            <div class="field">42</div>
+            <div class="field">43</div>
+            <div class="field player4">44</div>
+            <div class="field player4">45</div>
+            <div class="field player4">46</div>
+            <div class="field player4">47</div>
+            <div class="field player4">48</div>
+            <div class="field">49</div>
+            <div class="field">50</div>
+            <div class="field">51</div>
+            <div class="field">52</div>
+            <div class="field">53</div>
+            <div class="field">54</div>
         </div>
         <div class="wing" id="bottomWing">
-            <div class="field"></div>
-            <div class="field player1"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field player1"></div>
-            <div class="field player1"></div>
-            <div class="field player1"></div>
-            <div class="field player1"></div>
-            <div class="field player1"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
-            <div class="field"></div>
+            @*This for-loop replaces the code below.*@
+            @for (int i = 55; i <= 72; i++)
+            {
+                bool painted = false;
+
+                foreach (var p in p1Piecepositions)
+                {
+                    if (p1Pattern[p] == i)
+                    {
+                        <div class="field">
+                            <div class="brick player1"></div>
+                        </div>
+                        painted = true;
+                        break;
+                    }
+                    else if (i == 56 || i >= 62 && i <= 66)
+                    {
+                        <div class="field player1">@i</div>
+                        painted = true;
+                        break;
+                    }
+                }
+
+                @if (painted == false)
+                {
+                    <div class="field">@i</div>
+                }
+            }
+
+            @*
+                <div class="field">55</div>
+                <div class="field player1">56</div>
+                <div class="field">57</div>
+                <div class="field">58</div>
+                <div class="field">59</div>
+                <div class="field">60</div>
+                <div class="field">61</div>
+                <div class="field player1">62</div>
+                <div class="field player1">63</div>
+                <div class="field player1">64</div>
+                <div class="field player1">65</div>
+                <div class="field player1">66</div>
+                <div class="field">67</div>
+                <div class="field">68</div>
+                <div class="field">69</div>
+                <div class="field">70</div>
+                <div class="field">71</div>
+                <div class="field">72</div>
+            *@
         </div>
-        <div class="goal"></div>
-        <div class="start player1">
-            <div class="field">
-                <div class="brick player1"></div>
-            </div>
-            <div class="field">
-                <div class="brick player1"></div>
-            </div>
-            <div class="field">
-                <div class="brick player1"></div>
-            </div>
-            <div class="field">
-                <div class="brick player1"></div>
-            </div>
+
+
+        <div class="goal" id="goal"></div>
+
+        <div class="start player1" id="0">
+            @foreach (var p in p1Piecepositions)
+            {
+                if (p == 0)
+                {
+                    <div class="field">
+                        <div class="brick player1"></div>
+                    </div>
+                }
+            }
         </div>
-        <div class="start player2">
-            <div class="field">
-                <div class="brick player2"></div>
-            </div>
-            <div class="field">
-                <div class="brick player2"></div>
-            </div>
-            <div class="field">
-                <div class="brick player2"></div>
-            </div>
-            <div class="field">
-                <div class="brick player2"></div>
-            </div>
+        <div class="start player2" id="b2">
+            @foreach (var p in p2Piecepositions)
+            {
+                if (p == 0)
+                {
+                    <div class="field">
+                        <div class="brick player2"></div>
+                    </div>
+                }
+            }
         </div>
-        <div class="start player3">
-            <div class="field">
-                <div class="brick player3"></div>
-            </div>
-            <div class="field">
-                <div class="brick player3"></div>
-            </div>
-            <div class="field">
-                <div class="brick player3"></div>
-            </div>
-            <div class="field">
-                <div class="brick player3"></div>
-            </div>
+        <div class="start player3" id="b3">
+            @foreach (var p in p3Piecepositions)
+            {
+                if (p == 0)
+                {
+                    <div class="field">
+                        <div class="brick player3"></div>
+                    </div>
+                }
+            }
         </div>
-        <div class="start player4">
-            <div class="field">
-                <div class="brick player4"></div>
-            </div>
-            <div class="field">
-                <div class="brick player4"></div>
-            </div>
-            <div class="field">
-                <div class="brick player4"></div>
-            </div>
-            <div class="field">
-                <div class="brick player4"></div>
-            </div>
+        <div class="start player4" id="b4">
+            @foreach (var p in p4Piecepositions)
+            {
+                if (p == 0)
+                {
+                    <div class="field">
+                        <div class="brick player4"></div>
+                    </div>
+                }
+            }
         </div>
     </div>
 </body>

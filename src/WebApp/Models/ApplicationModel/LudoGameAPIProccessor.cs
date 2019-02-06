@@ -186,7 +186,7 @@ namespace WebApp.Models.ApplicationModel
 
         public string DeleteGame(int gameId)
         {
-            var route = "{gameId}/delete";
+            var route = "api/ludo/{gameId}";
             var request = new RestRequest(route, Method.DELETE);
             request.AddUrlSegment("gameId", gameId);
 

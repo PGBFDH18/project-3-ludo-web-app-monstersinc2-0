@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Models.BindingModel;
 
 namespace WebApp.Controllers
 {
     public class LudoController : Controller
     {
-        List<Guid> sessionIds = new List<Guid> { };
 
-        public IActionResult Index()
+        public IActionResult NewForm()
         {
-            return View();
+            return View("Index");
+        }
+
+        public IActionResult Index(PlayerBindingModel player)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(player);
+            }
+            return RedirectToAction("Game");
         }
 
         public IActionResult Manual()
@@ -30,19 +34,6 @@ namespace WebApp.Controllers
         {
             return View();
         }
-        
-        public bool OnPost()
-        {
-            var players = new List<string> { };
-            foreach (var p in Request.Form)
-            {
-                if (p.Value != "" && p.Key != "__RequestVerificationToken")
-                    players.Add(p.Value);
-            }
-            if (players.Count < 2 || players.Count > 4)
-                return false;
 
-            return true;
-        }
     }
 }

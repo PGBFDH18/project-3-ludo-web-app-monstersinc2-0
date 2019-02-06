@@ -12,19 +12,55 @@
 <div class="w-25">
     <form method="post">
         <div class="form-group">
-            <label class="col-form-label" for="Player1">Player 1</label>
-            <input type="text" class="form-control" placeholder="Enter nickname" id="Player1" name="Player1">
-
-            <label class="col-form-label" for="Player2">Player 2</label>
-            <input type="text" class="form-control" placeholder="Enter nickname" id="Player2" name="Player2">
-
-            <label class="col-form-label" for="Player3">Player 3</label>
-            <input type="text" class="form-control" placeholder="Enter nickname" id="Player3" name="Player3">
-
-            <label class="col-form-label" for="Player4">Player 4</label>
-            <input type="text" class="form-control" placeholder="Enter nickname" id="Player4" name="Player4">
-
-            <button type="submit" class="btn btn-outline-primary" asp-controller="Ludo" asp-action="OnPost">Start game</button>
+            <label class="col-form-label" for="P1Name">Player 1</label>
+            <input type="text" class="form-control" placeholder="Enter nickname" name="P1Name">
+            <label class="col-form-label" for="P1Color">Choose color</label>
+            <select class="form-control" id="P1Color" name="P1Color">
+                <option value="0">Red</option>
+                @*<option value="1">Green</option>
+                <option value="2">Blue</option>
+                <option value="3">Yellow</option>*@
+            </select>
         </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="P2Name">Player 2</label>
+            <input type="text" class="form-control" placeholder="Enter nickname" name="P2Name">
+
+            <label for="P2Color">Choose color</label>
+            <select class="form-control" id="P2Color" name="P2Color">
+                <option value="1">Green</option>
+                @*<option value="0">Red</option>
+                <option value="2">Blue</option>
+                <option value="3">Yellow</option>*@
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="P3Name">Player 3</label>
+            <input type="text" class="form-control" placeholder="Enter nickname" name="P3Name">
+
+            <label for="P3Color">Choose color</label>
+            <select class="form-control" id="P3Color" name="P3Color">
+                <option value="2">Blue</option>
+                @*<option value="0">Red</option>
+                <option value="1">Green</option>
+                <option value="3">Yellow</option>*@
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label" for="P4Name">Player 4</label>
+            <input type="text" class="form-control" placeholder="Enter nickname" name="P4Name">
+            <label for="P4Color">Choose color</label>
+            <select class="form-control" id="P4Color" name="P4Color">
+                @*<option value="0">Red</option>
+                <option value="1">Green</option>
+                <option value="2">Blue</option>*@
+                <option value="3">Yellow</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary" asp-controller="Ludo" asp-action="Game">Start game</button>
     </form>
 </div>

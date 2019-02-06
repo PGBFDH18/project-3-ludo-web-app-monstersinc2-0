@@ -1,9 +1,11 @@
 ﻿
 @{
     ViewData["Title"] = "Play Ludo";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
+
+@model PlayerBindingModel
+
 
 <h1>Play Ludo</h1>
 <p>Enter the nickname of all players. Leave empty if you are not four players.</p>
@@ -64,3 +66,38 @@
         <button type="submit" class="btn btn-outline-primary" asp-controller="Ludo" asp-action="Game">Start game</button>
     </form>
 </div>
+
+@*
+<form asp-controller="Ludo" asp-action="startGame">
+    <div class="w-25">
+        <label class="col-form-label" for="Player1">Player 1</label>
+        <input class="form-control" asp-for="PlayerName" placeholder="Enter nickname">
+        <span asp-validation-for="PlayerName"></span>
+        <select asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()"></select>
+    </div>
+    <div class="w-25">
+        <label class="col-form-label" for="Player2">Player 2</label>
+        <input class="form-control" asp-for="PlayerName" placeholder="Enter nickname" id="Player2">
+        <span asp-validation-for="PlayerName"></span>
+        <select asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()"></select>
+    </div>
+    <div class="w-25">
+        <label class="col-form-label" for="Player3">Player 3</label>
+        <input class="form-control" asp-for="PlayerName" placeholder="Enter nickname" id="Player3">
+        <span asp-validation-for="PlayerName"></span>
+        <select asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()"></select>
+    </div>
+    <div class="w-25">
+        <label class="col-form-label" for="Player4">Player 4</label>
+        <input class="form-control" asp-for="PlayerName" placeholder="Enter nickname" id="Player4">
+        <span asp-validation-for="PlayerName"></span>
+        <select asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()"></select>
+    </div>
+    <button type="submit" class="btn btn-outline-primary" asp-controller="Ludo" asp-action="Index">Start game</button>
+</form>
+*@
+
+@* Used to validate user entry from a client side by JavaScript*@
+@*@section Scripts{
+        @Html.PartialAsync("_ValidationScriptsPartial")
+    }*@

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Models.ApplicationModel;
+using WebApp.Models.BindingModel;
 
 namespace WebApp.Controllers
 {
@@ -12,9 +13,18 @@ namespace WebApp.Controllers
     {
         LudoGameAPIProccessor api = new LudoGameAPIProccessor();
 
-        public IActionResult Index()
+        public IActionResult NewForm()
         {
-            return View();
+            return View("Index");
+        }
+
+        public IActionResult Index(PlayerBindingModel player)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(player);
+            }
+            return RedirectToAction("Game");
         }
 
         [HttpGet("Ludo/Game/{gameID}")]

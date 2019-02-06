@@ -44,181 +44,178 @@ new int[] { 0, 37,
 15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
 38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 26, 27, 28, 29, 30, 73};}
 
-@{ int gameID = ViewBag.GameID;}
-@{ var api = new WebApp.Models.ApplicationModel.LudoGameAPIProccessor();}
-@{ var currentPlayer = api.GetCurrentPlayer(gameID);}
 @{
     Layout = null;
 }
 
-    <!DOCTYPE html>
-    <html>
+<!DOCTYPE html>
+<html>
 
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Game</title>
-        <link href="~/css/LudoStyle.css" rel="stylesheet" />
-        <link href="~/css/reset.css" rel="stylesheet" />
-        <script type="text/javascript" src="~/js/site.js"></script>
-    </head>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Game</title>
+    <link href="~/css/LudoStyle.css" rel="stylesheet" />
+    <link href="~/css/reset.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/js/site.js"></script>
+</head>
 
-    <body>
-        <div class="gameInfo">
-            <div class="currentPlayer">@currentPlayer.Name</div>
-            <div class="dice" style="cursor: pointer" onclick="RollDice(this)" onmouseover="">
-                @* Paints a die with correct number of dots depending on diceRoll. *@
-                @switch (diceRoll)
-                {
-                    case 1:
-                        <div class="diceDot" id="center"></div>
-                        break;
-                    case 2:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    case 3:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="center"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    case 4:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="rightUpper"></div>
-                        <div class="diceDot" id="leftLower"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    case 5:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="rightUpper"></div>
-                        <div class="diceDot" id="center"></div>
-                        <div class="diceDot" id="leftLower"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    case 6:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="leftMiddel"></div>
-                        <div class="diceDot" id="leftLower"></div>
-                        <div class="diceDot" id="rightUpper"></div>
-                        <div class="diceDot" id="rightMiddel"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    default:
-                        <p>wrong</p>
-                        break;
-                }
-            </div>
+<body>
+    <div class="gameInfo">
+        <div class="currentPlayer">player1</div>
+        <div class="dice">
+            @* Paints a die with correct number of dots depending on diceRoll. *@
+            @switch (diceRoll)
+            {
+                case 1:
+                    <div class="diceDot" id="center"></div>
+                    break;
+                case 2:
+                    <div class="diceDot" id="leftUpper"></div>
+                    <div class="diceDot" id="rightLower"></div>
+                    break;
+                case 3:
+                    <div class="diceDot" id="leftUpper"></div>
+                    <div class="diceDot" id="center"></div>
+                    <div class="diceDot" id="rightLower"></div>
+                    break;
+                case 4:
+                    <div class="diceDot" id="leftUpper"></div>
+                    <div class="diceDot" id="rightUpper"></div>
+                    <div class="diceDot" id="leftLower"></div>
+                    <div class="diceDot" id="rightLower"></div>
+                    break;
+                case 5:
+                    <div class="diceDot" id="leftUpper"></div>
+                    <div class="diceDot" id="rightUpper"></div>
+                    <div class="diceDot" id="center"></div>
+                    <div class="diceDot" id="leftLower"></div>
+                    <div class="diceDot" id="rightLower"></div>
+                    break;
+                case 6:
+                    <div class="diceDot" id="leftUpper"></div>
+                    <div class="diceDot" id="leftMiddel"></div>
+                    <div class="diceDot" id="leftLower"></div>
+                    <div class="diceDot" id="rightUpper"></div>
+                    <div class="diceDot" id="rightMiddel"></div>
+                    <div class="diceDot" id="rightLower"></div>
+                    break;
+                default:
+                    <p>wrong</p>
+                    break;
+            }
         </div>
+    </div>
 
-        <div class="board">
-            @* The following 4 div-blocks paints the different wings based on data. *@
-            <div class="wing" id="leftWing">
-                @for (int i = 1; i <= 18; i++)
+    <div class="board">
+        @* The following 4 div-blocks paints the different wings based on data. *@
+        <div class="wing" id="leftWing">
+            @for (int i = 1; i <= 18; i++)
+            {
+                if (i == 2 || i >= 8 && i <= 12)
                 {
-                    if (i == 2 || i >= 8 && i <= 12)
-                    {
-                        <div class="field player2" id="@i"></div>
-                    }
-                    else
-                    {
-                        <div class="field" id="@i"></div>
-                    }
+                    <div class="field player2" id="@i"></div>
                 }
-            </div>
-
-            <div class="wing" id="rightWing">
-                @for (int i = 19; i <= 36; i++)
+                else
                 {
-                    if (i == 20 || i >= 26 && i <= 30)
-                    {
-                        <div class="field player3" id="@i"></div>
-                    }
-                    else
-                    {
-                        <div class="field" id="@i"></div>
-                    }
-                }
-            </div>
-
-            <div class="wing" id="topWing">
-                @for (int i = 37; i <= 54; i++)
-                {
-                    if (i == 38 || i >= 44 && i <= 48)
-                    {
-                        <div class="field player4" id="@i"></div>
-                    }
-                    else
-                    {
-                        <div class="field" id="@i"></div>
-                    }
-                }
-            </div>
-
-            <div class="wing" id="bottomWing">
-                @for (int i = 55; i <= 72; i++)
-                {
-                    if (i == 56 || i >= 62 && i <= 66)
-                    {
-                        <div class="field player1" id="@i"></div>
-                    }
-                    else
-                    {
-                        <div class="field" id="@i"></div>
-                    }
-                }
-
-                @*
-                    @for (int i = 55; i <= 72; i++)
-                    {
-                        bool painted = false;
-
-                        foreach (var p in positions[0])
-                        {
-                            if (patterns[0][p] == i)
-                            {
-                                string brickID = "p" + 1 + "b" + (p + 1);
-                                <div class="field" id="@brickID" onclick="movePiece('@brickID', '@patterns[i - 1][positions[i - 1][j - 1] + diceRoll]')">
-                                        <div class="brick @player"></div>
-                                    </div>
-                                painted = true;
-                                break;
-                            }
-                            else if (i == 56 || i >= 62 && i <= 66)
-                            {
-                                <div class="field player1" id="@i"></div>
-                                painted = true;
-                                break;
-                            }
-                        }
-
-                        @if (painted == false)
-                        {
-                            <div class="field" id="@i"></div>
-                        }
-                    }*@
-            </div>
-
-            <div class="goal" id="73"></div>
-
-            @{for (int i = 1; i <= positions.Length; i++)
-                {
-                    string player = "player" + i;
-                    string id = "b" + i;
-
-                    <div class="start @player" id="@id">
-                        @for (int j = 1; j <= 4; j++)
-                        {
-                            string brickID = "p" + i + "b" + j;
-                            if (positions[i - 1][j - 1] == 0)
-                            {
-                                <div class="field" id="@brickID" onclick="movePiece('@brickID', '@patterns[i - 1][positions[i - 1][j - 1] + diceRoll]')">
-                                    <div class="brick @player"></div>
-                                </div>
-                            }
-                        }
-                    </div>
+                    <div class="field" id="@i"></div>
                 }
             }
         </div>
-    </body>
+
+        <div class="wing" id="rightWing">
+            @for (int i = 19; i <= 36; i++)
+            {
+                if (i == 20 || i >= 26 && i <= 30)
+                {
+                    <div class="field player3" id="@i"></div>
+                }
+                else
+                {
+                    <div class="field" id="@i"></div>
+                }
+            }
+        </div>
+
+        <div class="wing" id="topWing">
+            @for (int i = 37; i <= 54; i++)
+            {
+                if (i == 38 || i >= 44 && i <= 48)
+                {
+                    <div class="field player4" id="@i"></div>
+                }
+                else
+                {
+                    <div class="field" id="@i"></div>
+                }
+            }
+        </div>
+
+        <div class="wing" id="bottomWing">
+            @for (int i = 55; i <= 72; i++)
+            {
+                if (i == 56 || i >= 62 && i <= 66)
+                {
+                    <div class="field player1" id="@i"></div>
+                }
+                else
+                {
+                    <div class="field" id="@i"></div>
+                }
+            }
+
+            @*
+        @for (int i = 55; i <= 72; i++)
+        {
+            bool painted = false;
+
+            foreach (var p in positions[0])
+            {
+                if (patterns[0][p] == i)
+                {
+                    string brickID = "p" + 1 + "b" + (p + 1);
+                    <div class="field" id="@brickID" onclick="movePiece('@brickID', '@patterns[i - 1][positions[i - 1][j - 1] + diceRoll]')">
+                            <div class="brick @player"></div>
+                        </div>
+                    painted = true;
+                    break;
+                }
+                else if (i == 56 || i >= 62 && i <= 66)
+                {
+                    <div class="field player1" id="@i"></div>
+                    painted = true;
+                    break;
+                }
+            }
+
+            @if (painted == false)
+            {
+                <div class="field" id="@i"></div>
+            }
+        }*@
+        </div>
+
+        <div class="goal" id="73"></div>
+
+        @{for (int i = 1; i <= positions.Length; i++)
+            {
+                string player = "player" + i;
+                string id = "b" + i;
+
+                <div class="start @player" id="@id">
+                    @for (int j = 1; j <= 4; j++)
+                    {
+                        string brickID = "p" + i + "b" + j;
+                        if (positions[i - 1][j - 1] == 0)
+                        {
+                            <div class="field" id="@brickID" onclick="movePiece('@brickID', '@patterns[i - 1][positions[i - 1][j - 1] + diceRoll]')">
+                                <div class="brick @player"></div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        }
+    </div>
+</body>
 
 </html>

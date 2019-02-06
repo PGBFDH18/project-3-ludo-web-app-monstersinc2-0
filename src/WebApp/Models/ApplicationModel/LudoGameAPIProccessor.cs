@@ -19,7 +19,7 @@ namespace WebApp.Models.ApplicationModel
             return response.Content;
         }
 
-        public string AddNewPlayer(int gameId, string name, string color)
+        public string AddNewPalyer(int gameId, string name, string color)
         {
             var route = "api/ludo/{gameId}/player";
 

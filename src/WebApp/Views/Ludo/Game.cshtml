@@ -8,42 +8,65 @@ new int[] { 0, 0, 0, 0 }
 @{ var random = new Random();
     int diceRoll = random.Next(1, 7);}
 
-@{int[][] patterns = new int[][] {
-new int[] { 0, 55, 56, 57, 58, 59, 60, 18, 17, 16,
+@{ var players = new List<Player> {
+new Player()
+{
+PlayerId = 0,
+Name = "Nisse",
+PlayerColor = "Red",
+Pieces = new Piece[] { new Piece{ PieceId = 0, Position = 1, State = "Home"},
+new Piece{ PieceId = 1, Position = 3, State = "Home"},
+new Piece{ PieceId = 2, Position = 0, State = "Home"},
+new Piece{ PieceId = 3, Position = 0, State = "Home"}},
+Pattern = new int[] { 0, 55, 56, 57, 58, 59, 60, 18, 17, 16,
 15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
 38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 62, 63, 64, 65, 66, 73},
-new int[] { 0, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
+23, 24, 72, 71, 70, 69, 68, 67, 61, 62, 63, 64, 65, 66, 73}
+},
+new Player()
+{
+PlayerId = 1,
+Name = "Pisse",
+PlayerColor = "Green",
+Pieces = new Piece[] { new Piece{ PieceId = 0, Position = 1, State = "Home"},
+new Piece{ PieceId = 1, Position = 7, State = "Home"},
+new Piece{ PieceId = 2, Position = 0, State = "Home"},
+new Piece{ PieceId = 3, Position = 0, State = "Home"}},
+Pattern = new int[] { 0, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
 38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
 23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 8, 9, 10, 11, 12, 73},
-new int[] { 0, 19, 20, 21, 22,
+15, 14, 13, 7, 8, 9, 10, 11, 12, 73}
+},
+new Player()
+{
+PlayerId = 2,
+Name = "Päron",
+PlayerColor = "Blue",
+Pieces = new Piece[] { new Piece{ PieceId = 0, Position = 1, State = "Home"},
+new Piece{ PieceId = 1, Position = 3, State = "Home"},
+new Piece{ PieceId = 2, Position = 0, State = "Home"},
+new Piece{ PieceId = 3, Position = 0, State = "Home"}},
+Pattern = new int[] { 0, 37,
+38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
+23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
+15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 44, 45, 46, 47, 48, 73}
+},
+new Player()
+{
+PlayerId = 3,
+Name = "Pung",
+PlayerColor = "Yellow",
+Pieces = new Piece[] { new Piece{ PieceId = 0, Position = 1, State = "Home"},
+new Piece{ PieceId = 1, Position = 3, State = "Home"},
+new Piece{ PieceId = 2, Position = 0, State = "Home"},
+new Piece{ PieceId = 3, Position = 0, State = "Home"}},
+Pattern = new int[] { 0, 19, 20, 21, 22,
 23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
 15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
 38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 26, 27, 28, 29, 30, 73}
-,
-new int[] { 0, 37,
-38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 44, 45, 46, 47, 48, 73} }; }
-
-@{ int[] p1Pattern = new int[] { 0, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
-38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 62, 63, 64, 65, 66, 73};}
-@{ int[] p2pattern = new int[] { 0, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
-38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 8, 9, 10, 11, 12, 73};}
-@{ int[] p3pattern = new int[] { 0, 37,
-38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 44, 45, 46, 47, 48, 73};}
-@{ int[] p4pattern = new int[] { 0, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
-38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 26, 27, 28, 29, 30, 73};}
-
+}
+};}
+@{ var currentPlayerId = 0;}
 @{
     Layout = null;
 }
@@ -61,7 +84,7 @@ new int[] { 0, 37,
 
 <body>
     <div class="gameInfo">
-        <div class="currentPlayer">player1</div>
+        <div class="currentPlayer">@players[currentPlayerId].Name</div>
         <div class="dice">
             @* Paints a die with correct number of dots depending on diceRoll. *@
             @switch (diceRoll)
@@ -107,113 +130,150 @@ new int[] { 0, 37,
     </div>
 
     <div class="board">
-        @* The following 4 div-blocks paints the different wings based on data. *@
+        @* Paints the leftWing with pieces, if their positions is 1-18 *@
         <div class="wing" id="leftWing">
             @for (int i = 1; i <= 18; i++)
             {
-                if (i == 2 || i >= 8 && i <= 12)
+                bool painted = false;
+                var player = players[1];
+
+                foreach (var piece in player.Pieces)
                 {
-                    <div class="field player2" id="@i"></div>
+                    if (player.Pattern[piece.Position] == i)
+                    {
+                        string brickID = "p" + (player.PlayerId + 1) + "b" + (piece.PieceId + 1);
+
+                        <div class="field" id="@brickID" onclick="movePiece('@brickID', '@piece.Position + diceRoll]')">
+                            <div class="brick player@(player.PlayerId + 1)">@i</div>
+                        </div>
+                        painted = true;
+                        break;
+                    }
                 }
-                else
+
+                if (!painted && i == 2 || i >= 8 && i <= 12)
                 {
-                    <div class="field" id="@i"></div>
+                    <div class="field player@(player.PlayerId + 1)" id="@i">@i</div>
+                }
+                else if (!painted)
+                {
+                    <div class="field" id="@i">@i</div>
                 }
             }
         </div>
 
+        @* Paints the rightWing with pieces, if their positions is 37-54 *@
         <div class="wing" id="rightWing">
-            @for (int i = 19; i <= 36; i++)
-            {
-                if (i == 20 || i >= 26 && i <= 30)
-                {
-                    <div class="field player3" id="@i"></div>
-                }
-                else
-                {
-                    <div class="field" id="@i"></div>
-                }
-            }
-        </div>
-
-        <div class="wing" id="topWing">
             @for (int i = 37; i <= 54; i++)
             {
-                if (i == 38 || i >= 44 && i <= 48)
+                bool painted = false;
+                var player = players[2];
+
+                foreach (var piece in player.Pieces)
                 {
-                    <div class="field player4" id="@i"></div>
+                    if (player.Pattern[piece.Position] == i)
+                    {
+                        string brickID = "p" + (player.PlayerId + 1) + "b" + (piece.PieceId + 1);
+
+                        <div class="field" id="@brickID" onclick="movePiece('@brickID', '@piece.Position + diceRoll]')">
+                            <div class="brick player@(player.PlayerId + 1)">@i</div>
+                        </div>
+                        painted = true;
+                        break;
+                    }
                 }
-                else
+
+                if (!painted && i == 38 || i >= 44 && i <= 48)
                 {
-                    <div class="field" id="@i"></div>
+                    <div class="field player@(player.PlayerId + 1)" id="@i">@i</div>
+                }
+                else if (!painted)
+                {
+                    <div class="field" id="@i">@i</div>
                 }
             }
         </div>
 
+        @* Paints the topWing with pieces, if their positions is 19-36 *@
+        <div class="wing" id="topWing">
+            @for (int i = 19; i <= 36; i++)
+            {
+                bool painted = false;
+                var player = players[3];
+
+                foreach (var piece in player.Pieces)
+                {
+                    if (player.Pattern[piece.Position] == i)
+                    {
+                        string brickID = "p" + (player.PlayerId + 1) + "b" + (piece.PieceId + 1);
+
+                        <div class="field" id="@brickID" onclick="movePiece('@brickID', '@piece.Position + diceRoll]')">
+                            <div class="brick player@(player.PlayerId + 1)">@i</div>
+                        </div>
+                        painted = true;
+                        break;
+                    }
+                }
+
+                if (!painted && i == 20 || i >= 26 && i <= 30)
+                {
+                    <div class="field player@(player.PlayerId + 1)" id="@i">@i</div>
+                }
+                else if (!painted)
+                {
+                    <div class="field" id="@i">@i</div>
+                }
+            }
+        </div>
+
+        @* Paints the bottomWing with pieces, if their positions is 55-72 *@
         <div class="wing" id="bottomWing">
             @for (int i = 55; i <= 72; i++)
             {
-                if (i == 56 || i >= 62 && i <= 66)
-                {
-                    <div class="field player1" id="@i"></div>
-                }
-                else
-                {
-                    <div class="field" id="@i"></div>
-                }
-            }
+                bool painted = false;
+                var player = players[0];
 
-            @*
-        @for (int i = 55; i <= 72; i++)
-        {
-            bool painted = false;
-
-            foreach (var p in positions[0])
-            {
-                if (patterns[0][p] == i)
+                foreach (var piece in player.Pieces)
                 {
-                    string brickID = "p" + 1 + "b" + (p + 1);
-                    <div class="field" id="@brickID" onclick="movePiece('@brickID', '@patterns[i - 1][positions[i - 1][j - 1] + diceRoll]')">
-                            <div class="brick @player"></div>
+                    if (player.Pattern[piece.Position] == i)
+                    {
+                        string brickID = "p" + (player.PlayerId + 1) + "b" + (piece.PieceId + 1);
+
+                        <div class="field" id="@brickID" onclick="movePiece('@brickID', '@piece.Position + diceRoll]')">
+                            <div class="brick player@(player.PlayerId + 1)">@i</div>
                         </div>
-                    painted = true;
-                    break;
+                        painted = true;
+                        break;
+                    }
                 }
-                else if (i == 56 || i >= 62 && i <= 66)
-                {
-                    <div class="field player1" id="@i"></div>
-                    painted = true;
-                    break;
-                }
-            }
 
-            @if (painted == false)
-            {
-                <div class="field" id="@i"></div>
+                if (!painted && i == 56 || i >= 62 && i <= 66)
+                {
+                    <div class="field player@(player.PlayerId + 1)" id="@i">@i</div>
+                }
+                else if (!painted)
+                {
+                    <div class="field" id="@i">@i</div>
+                }
             }
-        }*@
         </div>
 
-        <div class="goal" id="73"></div>
 
-        @{for (int i = 1; i <= positions.Length; i++)
-            {
-                string player = "player" + i;
-                string id = "b" + i;
+        @* Paints the bases with pieces, if theyre position is 0 *@
+        @foreach (var player in players)
+        {
+            <div class="start player@(player.PlayerId + 1)" id="base@(player.PlayerId + 1)">
 
-                <div class="start @player" id="@id">
-                    @for (int j = 1; j <= 4; j++)
+                @foreach (var piece in player.Pieces)
+                {
+                    if (piece.Position == 0)
                     {
-                        string brickID = "p" + i + "b" + j;
-                        if (positions[i - 1][j - 1] == 0)
-                        {
-                            <div class="field" id="@brickID" onclick="movePiece('@brickID', '@patterns[i - 1][positions[i - 1][j - 1] + diceRoll]')">
-                                <div class="brick @player"></div>
-                            </div>
-                        }
+                        <div class="field" id="p1b@(piece.PieceId + 1)">
+                            <div class="brick player@(player.PlayerId + 1)">0</div>
+                        </div>
                     }
-                </div>
-            }
+                }
+            </div>
         }
     </div>
 </body>

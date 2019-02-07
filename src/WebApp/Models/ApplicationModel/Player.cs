@@ -24,5 +24,7 @@ namespace WebApp.Models.ApplicationModel
                 return PlayerId * 13;
             }
         }
+
+        public int[] Pattern { get; set; }
     }
 }

@@ -7,8 +7,14 @@ namespace WebApp.Controllers
 {
     public class LudoController : Controller
     {
-        ILudoGameAPIProccessor _ludoProccessor = new LudoGameAPIProccessor();
-        IPlayerFormExtractor _players = new PlayerFormExtractor();
+
+        private ILudoGameAPIProccessor _ludoProccessor { get; }
+        private IPlayerFormExtractor _extractor { get; }
+        public LudoController(ILudoGameAPIProccessor ludoProccessor, IPlayerFormExtractor extractor)
+        {
+            _ludoProccessor = ludoProccessor;
+            _extractor = extractor;
+        }
 
 
         public IActionResult NewForm()
@@ -23,14 +29,13 @@ namespace WebApp.Controllers
                 return View(players);
             }
 
-            List<Player> addedPlayers = _players.AddedPlayers(players);
+            List<Player> addedPlayers = _extractor.AddedPlayers(players);
             _ludoProccessor.CreateNewGame();
             foreach (var p in addedPlayers)
             {
                 _ludoProccessor.AddNewPalyer(1, p.Name, p.PlayerColor); // GameId is 1 for now As I need to get the new API from YOU, Joke.
             }
             _ludoProccessor.StartGame(1);
-
 
 
             return RedirectToAction("Game");

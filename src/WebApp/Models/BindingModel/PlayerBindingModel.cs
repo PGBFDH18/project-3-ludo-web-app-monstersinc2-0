@@ -5,47 +5,58 @@ namespace WebApp.Models.BindingModel
 {
     public class PlayerBindingModel
     {
+
+        #region
         [PlayerCustom]
         [StringLength(30, ErrorMessage = "Maximum length is {1}")]
         [MinLength(2, ErrorMessage = "At least 2 Charachter")]
         public string Player1Name { get; set; }
 
-
+        [ColorRequired("Player1Name", ErrorMessage = "Please Choose Color")]
         public Color Color1 { get; set; }
+        #endregion // Player1
 
+        #region
         [PlayerCustom]
         [StringLength(45, ErrorMessage = "Maximum length is {1}")]
         [MinLength(2, ErrorMessage = "At least 2 Charachter")]
         public string Player2Name { get; set; }
 
-        [ColorCustom("Color1", ErrorMessage = "Color already taken")]
+        [ColorRequired("Player2Name", ErrorMessage = "Please Choose Color")]
+        [ColorUniqAttribute("Color1", ErrorMessage = "Color already taken")]
         public Color Color2 { get; set; }
+        #endregion // Player2m
 
-
+        #region
         [StringLength(45, ErrorMessage = "Maximum length is {1}")]
         [MinLength(2, ErrorMessage = "At least 2 Charachter")]
         public string Player3Name { get; set; }
 
-        [ColorCustom("Color1", ErrorMessage = "Color already taken")]
-        [ColorCustom("Color2", ErrorMessage = "Color already taken")]
+        [ColorRequired("Player3Name", ErrorMessage = "Please Choose Color")]
+        [ColorUniqAttribute("Color1", ErrorMessage = "Color already taken")]
+        [ColorUniqAttribute("Color2", ErrorMessage = "Color already taken")]
         public Color Color3 { get; set; }
+        #endregion // Player3
 
+        #region
         [StringLength(45, ErrorMessage = "Maximum length is {1}")]
         [MinLength(2, ErrorMessage = "At least 2 Charachter")]
         public string Player4Name { get; set; }
 
-        [ColorCustom("Color3", ErrorMessage = "Color already taken")]
-        [ColorCustom("Color2", ErrorMessage = "Color already taken")]
-        [ColorCustom("Color1", ErrorMessage = "Color already taken")]
+        [ColorRequired("Player4Name", ErrorMessage = "Please Choose Color")]
+        [ColorUniqAttribute("Color3", ErrorMessage = "Color already taken")]
+        [ColorUniqAttribute("Color2", ErrorMessage = "Color already taken")]
+        [ColorUniqAttribute("Color1", ErrorMessage = "Color already taken")]
         public Color Color4 { get; set; }
-
+        #endregion // Player4
     }
 
     public enum Color
     {
+        color,
         red,
-        yellow,
+        green,
         blue,
-        green
+        yellow
     }
 }

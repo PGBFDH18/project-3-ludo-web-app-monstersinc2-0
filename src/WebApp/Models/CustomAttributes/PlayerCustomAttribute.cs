@@ -12,7 +12,7 @@ namespace WebApp.Models.BindingModel
             var code = value as string;
             if (code == null)
             {
-                return new ValidationResult("Field Can't be empty. Min 2 Players");
+                return new ValidationResult("Field Can't be empty");
             }
             return ValidationResult.Success;
         }

@@ -8,26 +8,26 @@ namespace WebApp.Models.BindingModel
     {
         public PlayerFormExtractor()
         {
-            players = new Dictionary<string, string>();
+            players = new List<Player>();
         }
 
-        public Dictionary<string, string> players;
+        public List<Player> players;
 
         /// <summary>
         /// Return a dictionary with players names and colors
         /// </summary>
         /// <param name="P">Object with values from user from form in View.Ludo.Index.cshtml</param>
         /// <returns></returns>
-        public Dictionary<string, string> AddedPlayers(PlayerBindingModel P)
+        public List<Player> AddedPlayers(PlayerBindingModel P)
         {
             if (P.Player1Name != null)
-                players.Add(P.Color1.ToString(), P.Player1Name);
+                players.Add(new Player { Name = P.Player1Name, PlayerColor = P.Color1.ToString() });
             if (P.Player2Name != null)
-                players.Add(P.Color2.ToString(), P.Player2Name);
+                players.Add(new Player { Name = P.Player2Name, PlayerColor = P.Color2.ToString() });
             if (P.Player3Name != null)
-                players.Add(P.Color3.ToString(), P.Player3Name);
+                players.Add(new Player { Name = P.Player3Name, PlayerColor = P.Color3.ToString() });
             if (P.Player4Name != null)
-                players.Add(P.Color4.ToString(), P.Player4Name);
+                players.Add(new Player { Name = P.Player4Name, PlayerColor = P.Color4.ToString() });
 
             return players;
 

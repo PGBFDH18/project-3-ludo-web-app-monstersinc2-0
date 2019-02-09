@@ -23,11 +23,11 @@ namespace WebApp.Controllers
                 return View(players);
             }
 
-            Dictionary<string, string> addedPlayers = _players.AddedPlayers(players);
+            List<Player> addedPlayers = _players.AddedPlayers(players);
             _ludoProccessor.CreateNewGame();
-            foreach (KeyValuePair<string, string> p in addedPlayers)
+            foreach (var p in addedPlayers)
             {
-                _ludoProccessor.AddNewPalyer(1, p.Value, p.Key); // GameId is 1 for now As I need to get the new API from YOU, Joke.
+                _ludoProccessor.AddNewPalyer(1, p.Name, p.PlayerColor); // GameId is 1 for now As I need to get the new API from YOU, Joke.
             }
             _ludoProccessor.StartGame(1);
 

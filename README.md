@@ -1,2 +1,1 @@
-# Projekt formulering
-[Fia Web App](https://pgbfdh18.github.io/webbutveckling-backend/project3.html)
+[![Build Status](https://dev.azure.com/ghassanaidi/LudoWebApp/_apis/build/status/LudoWebApp-ASP.NET%20Core-CI?branchName=development)](https://dev.azure.com/ghassanaidi/LudoWebApp/_build/latest?definitionId=16&branchName=development)

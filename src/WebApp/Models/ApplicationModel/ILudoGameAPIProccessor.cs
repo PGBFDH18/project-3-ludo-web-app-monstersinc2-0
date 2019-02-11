@@ -2,13 +2,13 @@
 {
     public interface ILudoGameAPIProccessor
     {
-        string CreateNewGame();
+        int CreateNewGame();
 
         string AddNewPalyer(int gameId, string name, string color);
 
         string StartGame(int gameId);
 
-        string RollDiece(int gameId);
+        int RollDiece(int gameId);
 
         Player GetCurrentPlayer(int gameId);
 

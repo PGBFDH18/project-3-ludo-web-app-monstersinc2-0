@@ -5,13 +5,14 @@ namespace WebApp.Models.ApplicationModel
 {
     public class LudoGame
     {
-        [JsonProperty(PropertyName = "players")]
-        public List<Player> _players = new List<Player>();
+        
+        [JsonProperty(PropertyName = "_players")]
+        public List<Player> _players { get; set; }
 
-        [JsonProperty(PropertyName = "gameState")]
-        public string _gameState = "NotStarted";
+        [JsonProperty(PropertyName = "_gameState")]
+        public string _gameState { get; set; }
 
         [JsonProperty(PropertyName = "currentPlayerId")]
-        public int currentPlayerId = 0;
+        public int currentPlayerId { get; set; }
     }
 }

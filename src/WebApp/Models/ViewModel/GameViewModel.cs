@@ -10,5 +10,6 @@ namespace WebApp.Models
         public int CurrentPlayerID { get; set; }
         public int CurrentDieRoll { get; set; }
         public List<Player> Players { get; set; }
+        public bool TimeToMove { get; set; } = false;
     }
 }

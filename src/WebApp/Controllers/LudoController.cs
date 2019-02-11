@@ -54,7 +54,7 @@ namespace WebApp.Controllers
             _ludoProccessor.StartGame(gameID);
 
             var model = new GameViewModel() { GameID = gameID};
-            model.CurrentDieRoll = 6;
+            model.CurrentDieRoll = 0;
             var game = _ludoProccessor.GameById(gameID);
             model.CurrentPlayerID = game.currentPlayerId;
             model.Players = game._players;
@@ -78,6 +78,31 @@ namespace WebApp.Controllers
             return View();
         }
 
+        public IActionResult RollDie(int gameID)
+        {
+            var model = new GameViewModel() { GameID = gameID};
+            model.CurrentDieRoll = _ludoProccessor.RollDiece(gameID);
+            var game = _ludoProccessor.GameById(gameID);
+            model.CurrentPlayerID = game.currentPlayerId;
+            model.Players = game._players;
+            model.TimeToMove = true;
+
+            return View("Game", model);
+        }
+
+        public IActionResult MovePiece(int pieceID, int gameID, int roll, int currentPlayer)
+        {
+            _ludoProccessor.MovePiece(gameID, pieceID, roll);
+            string temp = _ludoProccessor.EndTurn(gameID, currentPlayer);
+            var game = _ludoProccessor.GameById(gameID);
+            var model = new GameViewModel() { GameID = gameID};
+            model.CurrentPlayerID = game.currentPlayerId;
+            model.Players = game._players;
+            model.CurrentDieRoll = roll;
+            model.TimeToMove = false;
+
+            return View("Game", model);
+        }
 
     }
 }

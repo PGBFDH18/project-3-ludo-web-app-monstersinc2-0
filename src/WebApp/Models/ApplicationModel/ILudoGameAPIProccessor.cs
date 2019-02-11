@@ -21,7 +21,7 @@
         Player GetWinner(int gameId);
 
 
-        int NumberOfPlayersAdded(int gameId);
+        Player[] GetAllPlayers(int gameId);
 
         LudoGame GameById(int gameId);
 

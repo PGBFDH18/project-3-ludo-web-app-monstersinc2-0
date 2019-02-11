@@ -1,8 +1,4 @@
-﻿@{
-    Layout = null;
-}
-
-@{ var patterns = new Dictionary<string, int[]>
+﻿@{ var patterns = new Dictionary<string, int[]>
     {
         ["0"] = new int[] { 0, 55, 56, 57, 58, 59, 60, 18, 17, 16,
 15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
@@ -22,6 +18,10 @@
 38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 26, 27, 28, 29, 30, 73}
     };}
 
+@{
+    Layout = null;
+}
+
 @model GameViewModel
 
 @{ var diceRoll = Model.CurrentDieRoll;}
@@ -29,12 +29,12 @@
 @{ var currentPlayerId = Model.CurrentPlayerID;}
 
 @{ var players = Model.Players;}
-
+@{ int playerCount = 0;}
 @{ foreach (var player in players)
     {
         player.Pattern = patterns[player.PlayerColor];
-    }
-}
+        playerCount++;
+    }}
 
 <!DOCTYPE html>
 <html>
@@ -95,7 +95,7 @@
     </div>
 
     <div class="board">
-        @*Paints all four wings and pieces, if their positions says so.*@
+        @* Paints all four wings and pieces, if their positions says so.*@
         @for (int i = 0; i < 4; i++)
         {
             string wingID = null;
@@ -121,18 +121,18 @@
 
             if (i == 2)
             {
-                wingID = "topWing";
-                startPos = 19;
-                endPos = 36;
-                playerBricks = new int[] { 20, 26, 30 };
-            }
-
-            if (i == 3)
-            {
                 wingID = "rightWing";
                 startPos = 37;
                 endPos = 54;
                 playerBricks = new int[] { 38, 44, 48 };
+            }
+
+            if (i == 3)
+            {
+                wingID = "topWing";
+                startPos = 19;
+                endPos = 36;
+                playerBricks = new int[] { 20, 26, 30 };
             }
 
             <div class="wing" id="@wingID">
@@ -147,37 +147,36 @@
                             {
                                 string brickID = "p" + player.PlayerId + "b" + piece.PieceId;
                                 <div class="field" id="@brickID">
-                                    <div class="brick player@(player.PlayerId + 1)">@i</div>
+                                    <div class="brick player@(player.PlayerId + 1)">@j</div>
                                 </div>
                                 painted = true;
                                 break;
                             }
                         }
-                        if (!painted && i == playerBricks[0] || i >= playerBricks[1] && i <= playerBricks[2])
+                        if (!painted && j == playerBricks[0] || j >= playerBricks[1] && j <= playerBricks[2])
                         {
-                            <div class="field player@(player.PlayerId + 1)" id="@i">@i</div>
+                            <div class="field player@(i + 1)" id="@j">@j</div>
                             break;
                         }
                         else if (!painted)
                         {
-                            <div class="field" id="@i">@i</div>
+                            <div class="field" id="@j">@j</div>
                             break;
                         }
                     }
                 }
             </div>
 
-            // Paints the bases with pieces, if they have position 0.
             <div class="start player@(i + 1)" id="base@(i + 1)">
-                @if (players[i] != null)
+                @if (i < playerCount)
                 {
-                    @foreach (var piece in players[i].Pieces)
+                    foreach (var p in players[i].Pieces)
                     {
-                        if (piece.Position == 0)
+                        if (p.Position == 0)
                         {
-                            string brickID = "p" + i + "b" + piece.PieceId;
+                            string brickID = "p" + (i) + "b" + (p.PieceId);
                             <div class="field" id="@brickID">
-                                <div class="brick player@(i)"></div>
+                                <div class="brick player@(i + 1)"></div>
                             </div>
                         }
                     }
@@ -186,9 +185,9 @@
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                        string brickID = "p" + i + "b" + j;
+                        string brickID = "p" + (i) + "b" + (j);
                         <div class="field" id="@brickID">
-                            <div class="brick player@(i)"></div>
+                            <div class="brick player@(i + 1)"></div>
                         </div>
                     }
                 }

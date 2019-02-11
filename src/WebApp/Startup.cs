@@ -55,7 +55,7 @@ namespace WebApp
                 app.UseHsts();
             }
 
-            app.UseMiddleware<SerilogMiddleware>();
+            //app.UseMiddleware<SerilogMiddleware>();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

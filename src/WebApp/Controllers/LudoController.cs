@@ -59,7 +59,8 @@ namespace WebApp.Controllers
             model.CurrentPlayerID = game.currentPlayerId;
             model.Players = game._players;
 
-            return RedirectToAction("Game", model);
+            return View("Game", model);
+            //return RedirectToAction("Game", model);
         }
 
         public IActionResult Game()

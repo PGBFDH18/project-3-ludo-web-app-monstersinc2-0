@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using WebApp.Models;
 using WebApp.Models.ApplicationModel;
 using WebApp.Models.BindingModel;
 
@@ -42,15 +43,15 @@ namespace WebApp.Controllers
             }
 
             List<Player> addedPlayers = _extractor.AddedPlayers(players);
-            _ludoProccessor.CreateNewGame();
+            int gameid = _ludoProccessor.CreateNewGame();
             foreach (var p in addedPlayers)
             {
                 _ludoProccessor.AddNewPalyer(1, p.Name, p.PlayerColor); // GameId is 1 for now As I need to get the new API from YOU, Joke.
             }
             _ludoProccessor.StartGame(1);
 
-
-            return RedirectToAction("Game");
+            var model = new GameViewModel();
+            return RedirectToAction("Game", model );
         }
 
         public IActionResult Manual()

@@ -10,13 +10,13 @@ namespace WebApp.Models.ApplicationModel
         private RestClient client = new RestClient("https://localhost:44365/");
 
 
-        public string CreateNewGame()
+        public int CreateNewGame()
         {
             var route = "api/ludo";
 
             var response = client.Execute(new RestRequest(route, Method.POST));
 
-            return response.Content;
+            return JsonConvert.DeserializeObject<int>(response.Content);
         }
 
         public string AddNewPalyer(int gameId, string name, string color)
@@ -49,7 +49,7 @@ namespace WebApp.Models.ApplicationModel
 
         }
 
-        public string RollDiece(int gameId)
+        public int RollDiece(int gameId)
         {
             var route = "api/ludo/{gameId}/roll";
 
@@ -59,7 +59,7 @@ namespace WebApp.Models.ApplicationModel
 
             var response = client.Execute(request);
 
-            return response.Content;
+            return JsonConvert.DeserializeObject<int>(response.Content);
 
         }
 

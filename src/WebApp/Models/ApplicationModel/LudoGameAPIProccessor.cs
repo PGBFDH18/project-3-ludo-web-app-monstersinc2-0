@@ -147,7 +147,7 @@ namespace WebApp.Models.ApplicationModel
 
         }
 
-        public int NumberOfPlayersAdded(int gameId)
+        public Player[] GetAllPlayers(int gameId)
         {
             var route = "api/ludo/{gameId}/player";
 
@@ -158,11 +158,11 @@ namespace WebApp.Models.ApplicationModel
 
             try
             {
-                return JsonConvert.DeserializeObject<Player[]>(response.Content).Length;
+                return JsonConvert.DeserializeObject<Player[]>(response.Content);
             }
             catch
             {
-                return 0;
+                return null;
             }
         }
 

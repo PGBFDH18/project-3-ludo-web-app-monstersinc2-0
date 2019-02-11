@@ -182,6 +182,16 @@
                         }
                     }
                 }
+                else
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        string brickID = "p" + i + "b" + j;
+                        <div class="field" id="@brickID">
+                            <div class="brick player@(i)"></div>
+                        </div>
+                    }
+                }
             </div>
         }
     </div>

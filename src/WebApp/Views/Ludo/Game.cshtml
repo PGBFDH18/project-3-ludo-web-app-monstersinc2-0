@@ -1,263 +1,52 @@
-﻿@{ var patterns = new Dictionary<string, int[]>
-    {
-        ["0"] = new int[] { 0, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
-38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 62, 63, 64, 65, 66, 73},
-        ["1"] = new int[] { 0, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
-38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 8, 9, 10, 11, 12, 73},
-        ["2"] = new int[] { 0, 37,
-38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 44, 45, 46, 47, 48, 73},
-        ["3"] = new int[] { 0, 19, 20, 21, 22,
-23, 24, 72, 71, 70, 69, 68, 67, 61, 55, 56, 57, 58, 59, 60, 18, 17, 16,
-15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
-38, 39, 40, 41, 42, 36, 35, 34, 33, 32, 31, 25, 26, 27, 28, 29, 30, 73}
-    };}
+﻿@model GameViewModel
 
 @{
-    Layout = null;
+    ViewData["Title"] = "Ludo - Game ID: " + Model.GameID;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model GameViewModel
+<h1>Ludo Game ID: @Model.GameID</h1>
 
-@{ var diceRoll = Model.CurrentDieRoll;}
-
-@{ var currentPlayerId = Model.CurrentPlayerID;}
-
-@{ var players = Model.Players;}
-@{ int playerCount = players.Count;}
-
-@* SOMETHING MAKES THE FOREACH-LOOP ONLY LOOP ONCE!!! *@
-@{ foreach (var player in players)
-    {
-        player.Pattern = patterns[player.PlayerColor];
-    }}
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Game</title>
-    <link href="~/css/LudoStyle.css" rel="stylesheet" />
-    <link href="~/css/reset.css" rel="stylesheet" />
-    <script type="text/javascript" src="~/js/site.js"></script>
-</head>
-
-<body>
-    <div class="gameInfo">
-        <div class="currentPlayer">@players[currentPlayerId].Name</div>
-        @if (!Model.TimeToMove)
+<div class="row">
+    @{ for (int i = 0; i < Model.Players.Count; i = i + 2)
         {
-            <a asp-controller="Ludo" asp-action="RollDie" asp-route-gameID="@Model.GameID">
-                <div class="dice">
-                    @* Paints a die with correct number of dots depending on diceRoll. *@
-                    @switch (diceRoll)
-                    {
-                        case 1:
-                            <div class="diceDot" id="center"></div>
-                            break;
-                        case 2:
-                            <div class="diceDot" id="leftUpper"></div>
-                            <div class="diceDot" id="rightLower"></div>
-                            break;
-                        case 3:
-                            <div class="diceDot" id="leftUpper"></div>
-                            <div class="diceDot" id="center"></div>
-                            <div class="diceDot" id="rightLower"></div>
-                            break;
-                        case 4:
-                            <div class="diceDot" id="leftUpper"></div>
-                            <div class="diceDot" id="rightUpper"></div>
-                            <div class="diceDot" id="leftLower"></div>
-                            <div class="diceDot" id="rightLower"></div>
-                            break;
-                        case 5:
-                            <div class="diceDot" id="leftUpper"></div>
-                            <div class="diceDot" id="rightUpper"></div>
-                            <div class="diceDot" id="center"></div>
-                            <div class="diceDot" id="leftLower"></div>
-                            <div class="diceDot" id="rightLower"></div>
-                            break;
-                        case 6:
-                            <div class="diceDot" id="leftUpper"></div>
-                            <div class="diceDot" id="leftMiddel"></div>
-                            <div class="diceDot" id="leftLower"></div>
-                            <div class="diceDot" id="rightUpper"></div>
-                            <div class="diceDot" id="rightMiddel"></div>
-                            <div class="diceDot" id="rightLower"></div>
-                            break;
-                        default:
-                            <p>Click to roll</p>
-                            break;
-                    }
-                </div>
-            </a>
-        }
-        else
-        {
-            <div class="dice">
-                @* Paints a die with correct number of dots depending on diceRoll. *@
-                @switch (diceRoll)
+            string[] colors = new string[] { "danger", "success", "info", "warning" };
+            <div class="col-lg-4">
+                @for (int j = 0; j < 2 && i + j < Model.Players.Count; j++)
                 {
-                    case 1:
-                        <div class="diceDot" id="center"></div>
-                        break;
-                    case 2:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    case 3:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="center"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    case 4:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="rightUpper"></div>
-                        <div class="diceDot" id="leftLower"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    case 5:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="rightUpper"></div>
-                        <div class="diceDot" id="center"></div>
-                        <div class="diceDot" id="leftLower"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    case 6:
-                        <div class="diceDot" id="leftUpper"></div>
-                        <div class="diceDot" id="leftMiddel"></div>
-                        <div class="diceDot" id="leftLower"></div>
-                        <div class="diceDot" id="rightUpper"></div>
-                        <div class="diceDot" id="rightMiddel"></div>
-                        <div class="diceDot" id="rightLower"></div>
-                        break;
-                    default:
-                        <p>Click to roll</p>
-                        break;
-                }
-            </div>
-        }
-    </div>
-
-    <div class="board">
-        @* Paints all four wings and pieces, if their positions says so.*@
-        @for (int i = 0; i < 4; i++)
-        {
-            string wingID = null;
-            int startPos = 0;
-            int endPos = 0;
-            int[] playerBricks = null;
-
-            if (i == 0)
-            {
-                wingID = "bottomWing";
-                startPos = 55;
-                endPos = 72;
-                playerBricks = new int[] { 56, 62, 66 };
-            }
-
-            if (i == 1)
-            {
-                wingID = "leftWing";
-                startPos = 1;
-                endPos = 18;
-                playerBricks = new int[] { 2, 8, 12 };
-            }
-
-            if (i == 2)
-            {
-                wingID = "rightWing";
-                startPos = 37;
-                endPos = 54;
-                playerBricks = new int[] { 38, 44, 48 };
-            }
-
-            if (i == 3)
-            {
-                wingID = "topWing";
-                startPos = 19;
-                endPos = 36;
-                playerBricks = new int[] { 20, 26, 30 };
-            }
-
-            <div class="wing" id="@wingID">
-                @for (int j = startPos; j <= endPos; j++)
-                {
-                    bool painted = false;
-                    foreach (var player in players)
-                    {
-                        foreach (var piece in player.Pieces)
-                        {
-                            if (player.Pattern[piece.Position] == j)
-                            {
-                                string brickID = "p" + player.PlayerId + "b" + piece.PieceId;
-                                <div class="field" id="@brickID">
-                                    <div class="brick player@(player.PlayerId + 1)">@j</div>
-                                </div>
-                                painted = true;
-                                break;
-                            }
-                        }
-                        if (!painted && j == playerBricks[0] || j >= playerBricks[1] && j <= playerBricks[2])
-                        {
-                            <div class="field player@(i + 1)" id="@j">@j</div>
-                            break;
-                        }
-                        else if (!painted)
-                        {
-                            <div class="field" id="@j">@j</div>
-                            break;
-                        }
-                    }
-                }
-            </div>
-
-            <div class="start player@(i + 1)" id="base@(i + 1)">
-                @if (i < playerCount)
-                {
-                    foreach (var p in players[i].Pieces)
-                    {
-                        if (p.Position == 0)
-                        {
-                            string brickID = "p" + (i) + "b" + (p.PieceId);
-
-                            if (Model.TimeToMove && players[i].PlayerId == currentPlayerId)
-                            {
-                                <a asp-controller="Ludo" asp-action="MovePiece" asp-route-pieceID="@(p.PieceId)" 
-                                asp-route-gameID="@(Model.GameID)" asp-route-roll="@diceRoll" asp-route-currentPlayer="@(Model.CurrentPlayerID)">
-                                    <div class="field" id="@brickID">
-                                        <div class="brick player@(i + 1)"></div>
-                                    </div>
-                                </a>
-                            }
-                            else
-                            {
-                                <div class="field" id="@brickID">
-                                    <div class="brick player@(i + 1)"></div>
-                                </div>
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        string brickID = "p" + (i) + "b" + (j);
-                        <div class="field" id="@brickID">
-                            <div class="brick player@(i + 1)"></div>
+                    var player = Model.Players[i + j];
+                    <div class="card border-@colors[player.PlayerId] mb-3" style="max-width: 20rem;">
+                        <div class="card-header card-title"><h3>@player.Name</h3></div>
+                        <div class="card-body">
+                            <div class="card-body card-columns" style="column-count: 2">
+                                @{ foreach (var piece in player.Pieces)
+                                    {
+                                        <div class="card bg-@colors[player.PlayerId] mb-3" style="max-width: 50rem">
+                                            @(piece.PieceId + 1)<br />
+                                            Position: @piece.Position<br />
+                                            State: @piece.State
+                                        </div>
+                                    }}
+                            </div>
                         </div>
-                    }
+
+                    </div>
                 }
             </div>
-        }
-    </div>
-</body>
 
-</html>
+        }}
+
+            <div class="col-lg-4">
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <div class="card-header"><h3>@Model.Players[Model.CurrentPlayerID].Name's turn!</h3></div>
+                    <div class="card-body">
+                        <h4 class="card-title">Primary card title</h4>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+                <a asp-controller="Ludo" asp-action="RollDie">
+                    <button type="button" class="btn btn-primary">ROLL DIE</button>
+                    @*btn btn-primary disabled*@
+                </a>
+            </div>
+    </div>

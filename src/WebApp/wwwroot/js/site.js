@@ -1,4 +1,13 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function GetPlayerName(gameID) {
+    var request = new XMLHttpRequest();
+    var api = 'https://localhost:44365/api/ludo/' + gameID + '/player/current';
 
-// Write your JavaScript code.
+    request.open('GET', api, true);
+
+    request.onload = function () {
+        var data = JSON.parse(this.response);
+        data.forEach(player => {
+            console.log(player.name);
+        })
+    }
+}

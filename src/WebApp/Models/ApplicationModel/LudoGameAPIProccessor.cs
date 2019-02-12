@@ -7,7 +7,7 @@ namespace WebApp.Models.ApplicationModel
     // use this Class to send request to LoduGameAPI
     public class LudoGameAPIProccessor : ILudoGameAPIProccessor
     {
-        private RestClient client = new RestClient("https://ludowebapi20190212121743.azurewebsites.net/");
+        private RestClient client = new RestClient("https://localhost:44365/");
 
 
         public int CreateNewGame()

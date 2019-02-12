@@ -21,32 +21,69 @@
                             <div class="card-body card-columns" style="column-count: 2">
                                 @{ foreach (var piece in player.Pieces)
                                     {
-                                        <div class="card bg-@colors[player.PlayerId] mb-3" style="max-width: 50rem">
-                                            @(piece.PieceId + 1)<br />
-                                            Position: @piece.Position<br />
-                                            State: @piece.State
-                                        </div>
+                                        if (Model.TimeToMove && player.PlayerId == Model.CurrentPlayerID && piece.Position < 55)
+                                        {
+                                            <a asp-controller="Ludo" asp-action="MovePiece" asp-route-pieceID="@(piece.PieceId)"
+                                               asp-route-gameID="@(Model.GameID)" asp-route-roll="@(Model.CurrentDieRoll)" asp-route-currentPlayer="@(Model.CurrentPlayerID)">
+                                                <div class="card bg-@colors[player.PlayerId] mb-3" style="max-width: 50rem; color: white">
+                                                    @(piece.PieceId + 1)<br />
+                                                    Position: @piece.Position<br />
+                                                    State: @piece.State
+                                                </div>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <div class="card bg-@colors[player.PlayerId] mb-3" style="max-width: 50rem">
+                                                @(piece.PieceId + 1)<br />
+                                                Position: @piece.Position<br />
+                                                State: @piece.State
+                                            </div>
+                                        }
                                     }}
                             </div>
-                        </div>
 
+                            <div class="card-footer">
+                                @foreach (var piece in player.Pieces)
+                                {
+                                    int percent = (int)Math.Round(piece.Position / 0.55, 0);
+                                    <div class="progress">
+                                        <div class="progress-bar bg-@colors[player.PlayerId]" role="progressbar" style="width: @percent%" aria-valuenow="@(piece.Position)" aria-valuemin="0" aria-valuemax="55">@(piece.PieceId + 1) (@(piece.Position) / 55)</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
                     </div>
                 }
             </div>
 
         }}
 
-            <div class="col-lg-4">
-                <div class="card border-primary mb-3" style="max-width: 20rem;">
-                    <div class="card-header"><h3>@Model.Players[Model.CurrentPlayerID].Name's turn!</h3></div>
-                    <div class="card-body">
-                        <h4 class="card-title">Primary card title</h4>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <a asp-controller="Ludo" asp-action="RollDie">
-                    <button type="button" class="btn btn-primary">ROLL DIE</button>
-                    @*btn btn-primary disabled*@
-                </a>
+    <div class="col-lg-4">
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <div class="card-header"><h3>@Model.Players[Model.CurrentPlayerID].Name's turn!</h3></div>
+            <div class="card-body">
+                <h1 class="card-title">Latest roll: @(Model.CurrentDieRoll)</h1>
+                @if (Model.TimeToMove)
+                {
+                    <p class="card-text">Click the piece you want to move!</p>
+                    <p class="card-text">You can only move your own piece.</p>
+                }
+                else
+                {
+                    <p class="card-text">Click the button to roll the die!</p>
+                }
             </div>
+        </div>
+        @if (!Model.TimeToMove)
+        {
+            <a asp-controller="Ludo" asp-action="RollDie" asp-route-gameID="@(Model.GameID)">
+                <button type="button" class="btn btn-primary">ROLL DIE</button>
+            </a>
+        }
+        else
+        {
+            <button type="button" class="btn btn-primary disabled">ROLL DIE</button>
+        }
     </div>
+</div>

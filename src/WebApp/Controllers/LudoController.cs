@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using WebApp.Models;
 using WebApp.Models.ApplicationModel;
@@ -8,13 +10,23 @@ namespace WebApp.Controllers
 {
     public class LudoController : Controller
     {
-
-        public LudoController(ILudoGameAPIProccessor ludoProccessor, IPlayerFormExtractor extractor)
+        /// <summary>
+        /// Constructor for the controller that use DI for implmenting two needed class from application model and Logger calss. 
+        /// </summary>
+        /// <param name="ludoProccessor"></param>
+        /// <param name="extractor"></param>
+        /// <param name="log"></param>
+        public LudoController(
+            ILudoGameAPIProccessor ludoProccessor,
+            IPlayerFormExtractor extractor,
+            ILogger<LudoController> log)
         {
             _ludoProccessor = ludoProccessor;
             _extractor = extractor;
+            _log = log;
         }
 
+        private readonly ILogger _log;
         private ILudoGameAPIProccessor _ludoProccessor { get; }
         private IPlayerFormExtractor _extractor { get; }
 
@@ -44,7 +56,19 @@ namespace WebApp.Controllers
 
             List<Player> addedPlayers = _extractor.AddedPlayers(players);
 
-            int gameID =_ludoProccessor.CreateNewGame();
+            int gameID;
+            try
+            {
+                gameID = _ludoProccessor.CreateNewGame();
+                _log.LogInformation("New game Created with id: {gameId}.", gameID);
+            }
+            catch
+            {
+                _log.LogCritical("Connection to API Lost"); // Logging info 
+                throw new Exception("Connection to Api Lost");
+
+            }
+
 
             foreach (var p in addedPlayers)
             {
@@ -53,7 +77,9 @@ namespace WebApp.Controllers
 
             _ludoProccessor.StartGame(gameID);
 
-            var model = new GameViewModel() { GameID = gameID};
+
+
+            var model = new GameViewModel() { GameID = gameID };
             model.CurrentDieRoll = 0;
             var game = _ludoProccessor.GameById(gameID);
             model.CurrentPlayerID = game.currentPlayerId;
@@ -80,7 +106,7 @@ namespace WebApp.Controllers
 
         public IActionResult RollDie(int gameID)
         {
-            var model = new GameViewModel() { GameID = gameID};
+            var model = new GameViewModel() { GameID = gameID };
             model.CurrentDieRoll = _ludoProccessor.RollDiece(gameID);
             var game = _ludoProccessor.GameById(gameID);
             model.CurrentPlayerID = game.currentPlayerId;
@@ -95,7 +121,7 @@ namespace WebApp.Controllers
             _ludoProccessor.MovePiece(gameID, pieceID, roll);
             string temp = _ludoProccessor.EndTurn(gameID, currentPlayer);
             var game = _ludoProccessor.GameById(gameID);
-            var model = new GameViewModel() { GameID = gameID};
+            var model = new GameViewModel() { GameID = gameID };
             model.CurrentPlayerID = game.currentPlayerId;
             model.Players = game._players;
             model.CurrentDieRoll = roll;

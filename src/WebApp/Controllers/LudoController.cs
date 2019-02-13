@@ -84,7 +84,7 @@ namespace WebApp.Controllers
             catch
             {
                 _log.LogCritical("Connection to API Lost"); // Logging info 
-                throw new Exception("Connection to Api Lost");
+                return View("TemporarErrorPage");
 
             }
 

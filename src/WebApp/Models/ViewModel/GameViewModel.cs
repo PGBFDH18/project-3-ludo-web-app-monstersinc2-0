@@ -11,7 +11,7 @@ namespace WebApp.Models
         /// </summary>
         public GameViewModel()
         {
-            patterns = new Dictionary<string, int[]>
+            Patterns = new Dictionary<string, int[]>
             {
                 ["0"] = new int[] { 0, 55, 56, 57, 58, 59, 60, 18, 17, 16,
                                 15, 14, 13, 7, 1, 2, 3, 4, 5, 6, 54, 53, 52, 51, 50, 49, 43, 37,
@@ -32,7 +32,7 @@ namespace WebApp.Models
             };
         }
 
-        public Dictionary<string, int[]> patterns;
+        public Dictionary<string, int[]> Patterns { get; set; }
         public int GameID { get; set; }
         public int CurrentPlayerID { get; set; }
         public int CurrentDieRoll { get; set; }

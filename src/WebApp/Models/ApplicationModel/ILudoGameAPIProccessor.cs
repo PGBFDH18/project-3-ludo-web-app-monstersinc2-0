@@ -14,12 +14,9 @@
 
         string MovePiece(int gameId, int pieceId, int roll);
 
-
         string EndTurn(int gameId, int currentPlayeId);
 
-
         Player GetWinner(int gameId);
-
 
         Player[] GetAllPlayers(int gameId);
 

@@ -4,6 +4,9 @@ using WebApp.Models.ApplicationModel;
 namespace WebApp.Models.BindingModel
 
 {
+    /// <summary>
+    /// This class implement the corrosponding interface and it's role is to filter the retured data from the form in the Ludo/Index.cshtml
+    /// </summary>
     public class PlayerFormExtractor : IPlayerFormExtractor
     {
         public PlayerFormExtractor()
@@ -14,7 +17,7 @@ namespace WebApp.Models.BindingModel
         public List<Player> players;
 
         /// <summary>
-        /// Return a dictionary with players names and colors
+        /// Return a dictionary with players names and colors, only where the names were filled in the form by the user. 
         /// </summary>
         /// <param name="P">Object with values from user from form in View.Ludo.Index.cshtml</param>
         /// <returns></returns>

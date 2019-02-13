@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 namespace WebApp.Models.ApplicationModel
 {
-    // use this Class to send request to LoduGameAPI
+    /// <summary>
+    /// This class send HTTP requests to the RestAPI LudoGameAPI and deserialize the JSON resopnses
+    /// </summary>
     public class LudoGameAPIProccessor : ILudoGameAPIProccessor
     {
         private RestClient client = new RestClient("https://localhost:44365/");

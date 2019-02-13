@@ -15,9 +15,7 @@ namespace WebApp.Models.CustomAttributes
 
         public ColorRequiredAttribute(string otherProperty)
         {
-
             _OtherProperty = otherProperty;
-
         }
 
         protected override ValidationResult IsValid(object value,

@@ -25,8 +25,8 @@ namespace WebApp
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseSerilog() //Using serilog logging framwork
-                .UseStartup<Startup>();
+                                         WebHost.CreateDefaultBuilder(args)
+                                         .UseSerilog() //Using serilog logging framwork
+                                         .UseStartup<Startup>();
     }
 }

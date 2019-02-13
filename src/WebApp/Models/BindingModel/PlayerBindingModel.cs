@@ -7,13 +7,13 @@ namespace WebApp.Models.BindingModel
     {
 
         #region
-        [PlayerCustom]
+        [PlayerCustom] // Refere to CustomAttributes/PlayerCustomAttribute
         [RegularExpression(@"[\w ]*", ErrorMessage = "Only letters and numbers")]
         [StringLength(30, ErrorMessage = "Maximum length is {1}")]
         [MinLength(2, ErrorMessage = "At least 2 Charachter")]
         public string Player1Name { get; set; }
 
-        [ColorRequired("Player1Name", ErrorMessage = "Please Choose Color")]
+        [ColorRequired("Player1Name", ErrorMessage = "Please Choose Color")] // Refere to CustomAttributes/ColorRequiredAttribute
         public Color Color1 { get; set; }
         #endregion // Player1
 
@@ -25,7 +25,7 @@ namespace WebApp.Models.BindingModel
         public string Player2Name { get; set; }
 
         [ColorRequired("Player2Name", ErrorMessage = "Please Choose Color")]
-        [ColorUniqAttribute("Color1", ErrorMessage = "Color already taken")]
+        [ColorUniqAttribute("Color1", ErrorMessage = "Color already taken")] // Refere to CustomAttributes/ColorUniqAttribute
         public Color Color2 { get; set; }
         #endregion // Player2m
 

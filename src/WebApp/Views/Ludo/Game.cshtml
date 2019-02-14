@@ -15,7 +15,7 @@
                 @for (int j = 0; j < 2 && i + j < Model.Players.Count; j++)
                 {
                     var player = Model.Players[i + j];
-                    <div class="card border-@colors[player.PlayerId] mb-3" style="max-width: 20rem;">
+                    <div class="card border-@colors[int.Parse(player.PlayerColor)] mb-3" style="max-width: 20rem;">
                         <div class="card-header card-title"><h3>@player.Name</h3></div>
                         <div class="card-body">
                             <div class="card-body card-columns" style="column-count: 2">
@@ -25,7 +25,7 @@
                                         {
                                             <a asp-controller="Ludo" asp-action="MovePiece" asp-route-pieceID="@(piece.PieceId)"
                                                asp-route-gameID="@(Model.GameID)" asp-route-roll="@(Model.CurrentDieRoll)" asp-route-currentPlayer="@(Model.CurrentPlayerID)">
-                                                <div class="card bg-@colors[player.PlayerId] mb-3" style="max-width: 50rem; color: white">
+                                                <div class="card bg-@colors[int.Parse(player.PlayerColor)] mb-3" style="max-width: 50rem; color: white">
                                                     @(piece.PieceId + 1)<br />
                                                     Position: @piece.Position<br />
                                                     State: @piece.State
@@ -34,7 +34,7 @@
                                         }
                                         else
                                         {
-                                            <div class="card bg-@colors[player.PlayerId] mb-3" style="max-width: 50rem">
+                                            <div class="card bg-@colors[int.Parse(player.PlayerColor)] mb-3" style="max-width: 50rem">
                                                 @(piece.PieceId + 1)<br />
                                                 Position: @piece.Position<br />
                                                 State: @piece.State
@@ -48,7 +48,7 @@
                                 {
                                     int percent = (int)Math.Round(piece.Position / 0.55, 0);
                                     <div class="progress">
-                                        <div class="progress-bar bg-@colors[player.PlayerId]" role="progressbar" style="width: @percent%" aria-valuenow="@(piece.Position)" aria-valuemin="0" aria-valuemax="55">@(piece.PieceId + 1) (@(piece.Position) / 55)</div>
+                                        <div class="progress-bar bg-@colors[int.Parse(player.PlayerColor)]" role="progressbar" style="width: @percent%" aria-valuenow="@(piece.Position)" aria-valuemin="0" aria-valuemax="55">@(piece.PieceId + 1) (@(piece.Position) / 55)</div>
                                     </div>
                                 }
                             </div>

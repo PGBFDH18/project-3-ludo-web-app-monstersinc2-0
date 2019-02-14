@@ -195,5 +195,23 @@ namespace WebApp.Models.ApplicationModel
             var response = client.Execute(request);
             return response.Content;
         }
+
+        public Dictionary<int, LudoGame> GetActiveGames()
+        {
+            var route = "api/ludo";
+
+            var request = new RestRequest(route, Method.GET);
+
+            var response = client.Execute(request);
+
+            try
+            {
+                return JsonConvert.DeserializeObject<Dictionary<int, LudoGame>>(response.Content);
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

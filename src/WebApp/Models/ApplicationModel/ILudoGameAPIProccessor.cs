@@ -1,4 +1,6 @@
-﻿namespace WebApp.Models.ApplicationModel
+﻿using System.Collections.Generic;
+
+namespace WebApp.Models.ApplicationModel
 {
     public interface ILudoGameAPIProccessor
     {
@@ -23,6 +25,9 @@
         LudoGame GameById(int gameId);
 
         string DeleteGame(int gameId);
+
+        
+        Dictionary<int, LudoGame> GetActiveGames();
 
     }
 }

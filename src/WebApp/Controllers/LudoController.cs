@@ -30,9 +30,29 @@ namespace WebApp.Controllers
         /// Retruns an unvalidated new empty form to fill by user
         /// </summary>
         /// <returns>Index view</returns>
-        public IActionResult NewForm()
+
+        [Route("Ludo")]
+        [Route("Ludo/{gameID}")]
+        public IActionResult Index(int? gameID)
         {
-            return View("Index");
+            if (gameID == null)
+            {
+                return View(_ludoProccessor);
+            }
+
+            var model = CreateGameViewModel((int)gameID);
+
+            return View("Game", model);
+        }
+
+        public IActionResult Manual()
+        {
+            return View();
+        }
+
+        public IActionResult Stats()
+        {
+            return View();
         }
 
         /// <summary>
@@ -43,11 +63,11 @@ namespace WebApp.Controllers
         /// <returns>Eitehr return an index view if 
         /// validation fails along with error messages
         /// or redirect to Game view</returns>
-        public IActionResult Index(PlayerBindingModel players)
+        public IActionResult CreateGame(PlayerBindingModel players)
         {
             if (!ModelState.IsValid)
             {
-                return View(players);
+                return View("CreateGame", players);
             }
 
             List<Player> addedPlayers = _extractor.AddedPlayers(players);
@@ -71,33 +91,20 @@ namespace WebApp.Controllers
 
             _ludoProccessor.StartGame(gameID);
 
+            var model = CreateGameViewModel(gameID);
+
+            return View("Game", model);
+        }
+
+        public GameViewModel CreateGameViewModel(int gameID)
+        {
             var model = new GameViewModel() { GameID = gameID };
             model.CurrentDieRoll = 0;
             var game = _ludoProccessor.GameById(gameID);
             model.CurrentPlayerID = game.currentPlayerId;
             model.Players = game._players;
 
-            foreach (var p in model.Players)
-            {
-                p.Pattern = model.Patterns[p.PlayerColor];
-            }
-
-            return View("Game", model);
-        }
-
-        public IActionResult Game()
-        {
-            return View();
-        }
-
-        public IActionResult Manual()
-        {
-            return View();
-        }
-
-        public IActionResult Stats()
-        {
-            return View();
+            return model;
         }
 
         /// <summary>

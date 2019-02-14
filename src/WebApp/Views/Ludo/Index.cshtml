@@ -3,47 +3,32 @@
 
 }
 
-@model PlayerBindingModel
-
+@model ILudoGameAPIProccessor
 
 <h1>Play Ludo</h1>
-<h3>Enter NickName to add new player</h3>
-<p>At least two players are required for a game of Ludo.</p>
-<img src="~/Ludo.jpg" alt="LudoGamePhoto" height="150" width="200" />
+<p class="h4">Choose your game or <a asp-controller="Ludo" asp-action="CreateGame">Create a new game</a>!</p>
 
-<form asp-controller="Ludo" asp-action="NewForm">
-    <div class="w-25">
-        <label class="col-form-label" for="Player1">Player 1</label>
-        <input class="form-control" asp-for="Player1Name" placeholder="Nickname">
-        <span class="alert-danger" style="background:none; color:red;" asp-validation-for="Player1Name"></span><br />
-        <select asp-for="Color1" asp-items="Html.GetEnumSelectList<Color>()"></select>
-        <span asp-validation-for="Color1"></span>
-    </div>
-    <div class="w-25">
-        <label class="col-form-label" for="Player2">Player 2</label>
-        <input class="form-control" asp-for="Player2Name" placeholder="Nickname" id="Player2">
-        <span class="alert-danger" style="background:none; color:red;" asp-validation-for="Player2Name"></span><br />
-        <select asp-for="Color2" asp-items="Html.GetEnumSelectList<Color>()"></select>
-        <span asp-validation-for="Color2"></span>
-    </div>
-    <div class="w-25">
-        <label class="col-form-label" for="Player3">Player 3</label>
-        <input class="form-control" asp-for="Player3Name" placeholder="Nickname" id="Player3">
-        <span asp-validation-for="Player3Name"></span><br />
-        <select asp-for="Color3" asp-items="Html.GetEnumSelectList<Color>()"></select>
-        <span asp-validation-for="Color3"></span>
-    </div>
-    <div class="w-25">
-        <label class="col-form-label" for="Player4">Player 4</label>
-        <input class="form-control" asp-for="Player4Name" placeholder="Nickname" id="Player4">
-        <span asp-validation-for="Player4Name"></span><br />
-        <select asp-for="Color4" asp-items="Html.GetEnumSelectList<Color>()"></select>
-        <span asp-validation-for="Color4"></span>
-    </div><br />
-    <button type="submit" class="btn btn-outline-primary" asp-controller="Ludo" asp-action="Index">Start game</button>
-</form>
-
-@* Used to validate user entry from a client side by JavaScript*@
-@*@section Scripts{
-        @Html.PartialAsync("_ValidationScriptsPartial")
-    }*@
+<table class="table table-hover">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">Game ID</th>
+            <th scope="col">Player 1</th>
+            <th scope="col">Player 2</th>
+            <th scope="col">Player 3</th>
+            <th scope="col">Player 4</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ Dictionary<int, LudoGame> games = Model.GetActiveGames();}
+        @foreach (var pair in games)
+        {
+        <tr class="table-secondary" onclick="location.href = '@Url.Action("Index", "Ludo", new { gameID = pair.Key})'" style="cursor:pointer">
+            <th scope="row">@pair.Key</th>
+            @foreach (var p in pair.Value._players)
+            {
+                <td>@p.Name</td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>

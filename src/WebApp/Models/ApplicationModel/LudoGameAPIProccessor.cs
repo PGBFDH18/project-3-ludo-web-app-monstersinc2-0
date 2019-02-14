@@ -9,9 +9,9 @@ namespace WebApp.Models.ApplicationModel
     /// </summary>
     public class LudoGameAPIProccessor : ILudoGameAPIProccessor
     {
-        private RestClient client = new RestClient("https://ludowebapi20190212121743.azurewebsites.net/");
         //private RestClient client = new RestClient("https://localhost:44365/");
-        
+        private RestClient client = new RestClient("https://ludowebapi20190212121743.azurewebsites.net/");
+
         public int CreateNewGame()
         {
             var route = "api/ludo";

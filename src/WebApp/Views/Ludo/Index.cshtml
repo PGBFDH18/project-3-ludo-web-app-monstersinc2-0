@@ -4,31 +4,39 @@
 }
 
 @model ILudoGameAPIProccessor
+@{ Dictionary<int, LudoGame> games = Model.GetActiveGames();}
 
 <h1>Play Ludo</h1>
 <p class="h4">Choose your game or <a asp-controller="Ludo" asp-action="CreateGame">Create a new game</a>!</p>
 
-<table class="table table-hover">
-    <thead>
-        <tr class="table-dark">
-            <th scope="col">Game ID</th>
-            <th scope="col">Player 1</th>
-            <th scope="col">Player 2</th>
-            <th scope="col">Player 3</th>
-            <th scope="col">Player 4</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{ Dictionary<int, LudoGame> games = Model.GetActiveGames();}
-        @foreach (var pair in games)
-        {
-        <tr class="table-secondary" onclick="location.href = '@Url.Action("Index", "Ludo", new { gameID = pair.Key})'" style="cursor:pointer">
-            <th scope="row">@pair.Key</th>
-            @foreach (var p in pair.Value._players)
+@if (games != null)
+{
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-dark">
+                <th scope="col">Game ID</th>
+                <th scope="col">Player 1</th>
+                <th scope="col">Player 2</th>
+                <th scope="col">Player 3</th>
+                <th scope="col">Player 4</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pair in games)
             {
-                <td>@p.Name</td>
+                <tr class="table-secondary" onclick="location.href = '@Url.Action("Index", "Ludo", new { gameID = pair.Key })'" style="cursor:pointer">
+                    <th scope="row">@pair.Key</th>
+                    @foreach (var p in pair.Value._players)
+                    {
+                        <td>@p.Name</td>
+                    }
+                </tr>
             }
-        </tr>
-        }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}
+else
+{
+    <br />
+    <p class="h4">There is no active games.</p>
+}

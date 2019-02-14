@@ -18,23 +18,37 @@
                         <div class="card-body card-columns" style="column-count: 2">
                             @{ foreach (var piece in player.Pieces)
                                 {
-                                    if (Model.TimeToMove && player.PlayerId == Model.CurrentPlayerID && piece.Position < 55)
+                                    if (Model.TimeToMove && player.PlayerId == Model.CurrentPlayerID && piece.Position <= 55)
                                     {
                                         <a asp-controller="Ludo" asp-action="MovePiece" asp-route-pieceID="@(piece.PieceId)"
                                            asp-route-gameID="@(Model.GameID)" asp-route-roll="@(Model.CurrentDieRoll)" asp-route-currentPlayer="@(Model.CurrentPlayerID)">
                                             <div class="card bg-@colors[int.Parse(player.PlayerColor)] mb-3" style="max-width: 50rem; color: white">
-                                                @(piece.PieceId + 1)<br />
-                                                Position: @piece.Position<br />
-                                                State: @piece.State
+                                                <p class="mb-0 h5">@(piece.PieceId + 1)</p>
+                                                <p class="mb-0">Position: @piece.Position</p>
+                                                @if (piece.Position > 55)
+                                                {<p class="mb-0">Goal</p>}
+                                                else if (piece.Position > 50)
+                                                {<p class="mb-0">GoalPath</p>}
+                                                else if (piece.Position > 0)
+                                                {<p class="mb-0">InGame</p>}
+                                                else
+                                                {<p class="mb-0">HomeArea</p> }
                                             </div>
                                         </a>
                                     }
                                     else
                                     {
                                         <div class="card bg-@colors[int.Parse(player.PlayerColor)] mb-3" style="max-width: 50rem">
-                                            @(piece.PieceId + 1)<br />
-                                            Position: @piece.Position<br />
-                                            State: @piece.State
+                                            <p class="mb-0 h5">@(piece.PieceId + 1)</p>
+                                            <p class="mb-0">Position: @piece.Position</p>
+                                            @if (piece.Position > 55)
+                                            {<p class="mb-0">Goal</p>}
+                                            else if (piece.Position > 50)
+                                            {<p class="mb-0">GoalPath</p>}
+                                            else if (piece.Position > 0)
+                                            {<p class="mb-0">InGame</p>}
+                                            else
+                                            {<p class="mb-0">HomeArea</p>}
                                         </div>
                                     }
                                 }}
@@ -56,20 +70,33 @@
         }
     }
 </div>
+
+
 <div class="card border-primary mb-3" style="max-width: 20rem;">
-    <div class="card-header"><h3>@Model.Players[Model.CurrentPlayerID].Name's turn!</h3></div>
-    <div class="card-body">
-        <h1 class="card-title">Latest roll: @(Model.CurrentDieRoll)</h1>
-        @if (Model.TimeToMove)
-        {
-            <p class="card-text">Click the piece you want to move!</p>
-            <p class="card-text">You can only move your own piece.</p>
-        }
-        else
-        {
-            <p class="card-text">Click the button to roll the die!</p>
-        }
-    </div>
+    @if (Model.Winner != null)
+    {
+        <div class="card-header"><h3>@Model.Winner.Name.ToUpper() WON!</h3></div>
+        <div class="card-body">
+            <h1 class="card-title">Congratulations!</h1>
+                <p class="card-text">Please see the <a asp-controller="Ludo" asp-action="Stats">Stats</a> page to view former winners!</p>
+        </div>
+    }
+    else
+    {
+        <div class="card-header"><h3>@Model.Players[Model.CurrentPlayerID].Name's turn!</h3></div>
+        <div class="card-body">
+            <h1 class="card-title">Latest roll: @(Model.CurrentDieRoll)</h1>
+            @if (Model.TimeToMove)
+            {
+                <p class="card-text">Click the piece you want to move!</p>
+                <p class="card-text">You can only move your own piece.</p>
+            }
+            else
+            {
+                <p class="card-text">Click the button to roll the die!</p>
+            }
+        </div>
+    }
 </div>
 
 @if (!Model.TimeToMove)

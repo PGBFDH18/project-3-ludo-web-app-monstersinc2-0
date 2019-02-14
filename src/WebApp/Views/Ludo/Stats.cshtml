@@ -1,4 +1,5 @@
-﻿@{ var winners = new List<Winner> {
+﻿@*
+@{ var winners = new List<Winner> {
 new Winner{ GameID = 1, User = "Nordeke", Points = 365},
 new Winner{ GameID = 3, User = "Ghassan", Points = 234},
 new Winner{ GameID = 2, User = "Victor", Points = 435},
@@ -6,6 +7,7 @@ new Winner{ GameID = 6, User = "Benjamin", Points = 423},
 new Winner{ GameID = 5, User = "Stephan", Points = 323},
 new Winner{ GameID = 4, User = "Olof", Points = 356}
 };}
+    *@
 @{
     ViewData["Title"] = "Stats";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,6 +15,7 @@ new Winner{ GameID = 4, User = "Olof", Points = 356}
 
 <h1>Stats</h1>
 
+@*
 <table class="table table-dark">
     <thead>
         <tr>
@@ -38,3 +41,4 @@ new Winner{ GameID = 4, User = "Olof", Points = 356}
         }
     </tbody>
 </table> 
+*@

@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using WebApp.Models;
 using WebApp.Models.ApplicationModel;
 using WebApp.Models.BindingModel;
+using System.IO;
 
 namespace WebApp.Controllers
 {
@@ -103,6 +105,10 @@ namespace WebApp.Controllers
             var game = _ludoProccessor.GameById(gameID);
             model.CurrentPlayerID = game.currentPlayerId;
             model.Players = game._players;
+            if (game._gameState == "2")
+            {
+                model.Winner = _ludoProccessor.GetWinner(gameID);
+            }
 
             return model;
         }
@@ -123,12 +129,7 @@ namespace WebApp.Controllers
             model.TimeToMove = true;
 
             _log.LogInformation("Dice returned {DiceRollResult}, game id {gameId}", model.CurrentDieRoll, gameID); // Logging
-
-            foreach (var p in model.Players)
-            {
-                p.Pattern = model.Patterns[p.PlayerColor];
-            }
-
+            
             return View("Game", model);
         }
 
@@ -151,14 +152,14 @@ namespace WebApp.Controllers
             model.Players = game._players;
             model.CurrentDieRoll = roll;
             model.TimeToMove = false;
+            if (game._gameState == "2")
+            {
+                model.Winner = _ludoProccessor.GetWinner(gameID);
+            }
 
             _log.LogInformation("Dice returned {DiceRollResult} for the currnet player " +
                                 "with ID {CurretnPalyerID}, game id {gameId}", roll, currentPlayer, gameID); // Logging
-            foreach (var p in model.Players)
-            {
-                p.Pattern = model.Patterns[p.PlayerColor];
-            }
-
+            
             return View("Game", model);
         }
 

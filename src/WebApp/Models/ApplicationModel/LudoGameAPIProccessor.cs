@@ -121,7 +121,7 @@ namespace WebApp.Models.ApplicationModel
         {
             var route = "api/ludo/{gameId}/winner";
 
-            var request = new RestRequest(route, Method.PUT);
+            var request = new RestRequest(route, Method.GET);
 
             request.AddUrlSegment("gameId", gameId);
 

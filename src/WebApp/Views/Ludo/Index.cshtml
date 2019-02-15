@@ -7,7 +7,7 @@
 @{ Dictionary<int, LudoGame> games = Model.GetActiveGames();}
 
 <h1>Play Ludo</h1>
-<p class="h4">Choose your game or <a asp-controller="Ludo" asp-action="CreateGame">Create a new game</a>!</p>
+<p class="h4">Choose your game or <a asp-controller="Ludo" asp-action="NewForm">Create a new game</a>!</p>
 
 @if (games != null)
 {

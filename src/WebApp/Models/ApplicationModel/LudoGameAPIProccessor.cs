@@ -9,8 +9,8 @@ namespace WebApp.Models.ApplicationModel
     /// </summary>
     public class LudoGameAPIProccessor : ILudoGameAPIProccessor
     {
-        //private RestClient client = new RestClient("https://localhost:44365/");
-        private RestClient client = new RestClient("https://ludowebapi20190212121743.azurewebsites.net/");
+        private RestClient client = new RestClient("https://localhost:44365/");
+        //private RestClient client = new RestClient("https://ludowebapi20190212121743.azurewebsites.net/");
 
         public int CreateNewGame()
         {
@@ -212,6 +212,36 @@ namespace WebApp.Models.ApplicationModel
             {
                 return null;
             }
+        }
+
+        public List<Winner> GetStats()
+        {
+            var route = "api/ludo/stats";
+
+            var request = new RestRequest(route, Method.GET);
+
+            var response = client.Execute(request);
+
+            try
+            {
+                return JsonConvert.DeserializeObject<List<Winner>>(response.Content);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public string AddWinner(string name)
+        {
+            var route = "api/ludo/stats";
+
+            var request = new RestRequest(route, Method.POST);
+            request.AddQueryParameter("name", name);
+
+            var response = client.Execute(request);
+
+            return response.Content;
         }
     }
 }

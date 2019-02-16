@@ -58,9 +58,9 @@
                     <div class="card-footer">
                         @foreach (var piece in player.Pieces)
                         {
-                            int percent = (int)Math.Round(piece.Position / 0.55, 0);
+                            int percent = (int)Math.Round(piece.Position / 0.56, 0);
                             <div class="progress">
-                                <div class="progress-bar bg-@colors[int.Parse(player.PlayerColor)]" role="progressbar" style="width: @percent%" aria-valuenow="@(piece.Position)" aria-valuemin="0" aria-valuemax="55">@(piece.PieceId + 1) (@(piece.Position) / 55)</div>
+                                <div class="progress-bar bg-@colors[int.Parse(player.PlayerColor)]" role="progressbar" style="width: @percent%" aria-valuenow="@(piece.Position)" aria-valuemin="0" aria-valuemax="56">@(piece.PieceId + 1) (@(piece.Position) / 56)</div>
                             </div>
                         }
                     </div>
@@ -77,7 +77,7 @@
     {
         <div class="card-header"><h3>@Model.Winner.Name.ToUpper() WON!</h3></div>
         <div class="card-body">
-            <h1 class="card-title">Congratulations!</h1>
+            <h1 class="card-title">Congrats!</h1>
                 <p class="card-text">Please see the <a asp-controller="Ludo" asp-action="Stats">Stats</a> page to view former winners!</p>
         </div>
     }
@@ -99,7 +99,7 @@
     }
 </div>
 
-@if (!Model.TimeToMove)
+@if (!Model.TimeToMove && Model.Winner == null)
 {
     <a asp-controller="Ludo" asp-action="RollDie" asp-route-gameID="@(Model.GameID)">
         <button type="button" class="btn btn-primary">ROLL DIE</button>

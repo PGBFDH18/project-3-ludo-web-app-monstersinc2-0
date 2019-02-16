@@ -54,7 +54,9 @@ namespace WebApp.Controllers
 
         public IActionResult Stats()
         {
-            return View();
+            var model = _ludoProccessor.GetStats();
+
+            return View(model);
         }
 
         /// <summary>
@@ -155,6 +157,7 @@ namespace WebApp.Controllers
             if (game._gameState == "2")
             {
                 model.Winner = _ludoProccessor.GetWinner(gameID);
+                _ludoProccessor.AddWinner(model.Winner.Name);
             }
 
             _log.LogInformation("Dice returned {DiceRollResult} for the currnet player " +

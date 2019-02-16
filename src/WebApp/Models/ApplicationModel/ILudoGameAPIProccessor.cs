@@ -25,9 +25,11 @@ namespace WebApp.Models.ApplicationModel
         LudoGame GameById(int gameId);
 
         string DeleteGame(int gameId);
-
         
         Dictionary<int, LudoGame> GetActiveGames();
+
+        List<Winner> GetStats();
+        string AddWinner(string name);
 
     }
 }

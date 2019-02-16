@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\stats.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Models\ViewModel\stats.txt" />
   </ItemGroup>
 
@@ -24,6 +28,11 @@
     <PackageReference Include="Seq.Extensions.Logging" Version="4.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="4.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
 
 </Project>

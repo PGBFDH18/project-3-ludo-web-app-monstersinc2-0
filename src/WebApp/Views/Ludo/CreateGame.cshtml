@@ -14,32 +14,38 @@
 
 <form asp-controller="Ludo" asp-action="CreateGame">
     <div class="w-25">
-        <label class="col-form-label" for="Player1">Player 1</label>
-        <input class="form-control" asp-for="Player1Name" placeholder="Nickname">
-        <span class="alert-danger" style="background:none; color:red;" asp-validation-for="Player1Name"></span><br />
-        <select asp-for="Color1" asp-items="Html.GetEnumSelectList<Color>()"></select>
-        <span asp-validation-for="Color1"></span>
-    </div>
-    <div class="w-25">
-        <label class="col-form-label" for="Player2">Player 2</label>
-        <input class="form-control" asp-for="Player2Name" placeholder="Nickname" id="Player2">
-        <span class="alert-danger" style="background:none; color:red;" asp-validation-for="Player2Name"></span><br />
-        <select asp-for="Color2" asp-items="Html.GetEnumSelectList<Color>()"></select>
-        <span asp-validation-for="Color2"></span>
-    </div>
-    <div class="w-25">
-        <label class="col-form-label" for="Player3">Player 3</label>
-        <input class="form-control" asp-for="Player3Name" placeholder="Nickname" id="Player3">
-        <span asp-validation-for="Player3Name"></span><br />
-        <select asp-for="Color3" asp-items="Html.GetEnumSelectList<Color>()"></select>
-        <span asp-validation-for="Color3"></span>
-    </div>
-    <div class="w-25">
-        <label class="col-form-label" for="Player4">Player 4</label>
-        <input class="form-control" asp-for="Player4Name" placeholder="Nickname" id="Player4">
-        <span asp-validation-for="Player4Name"></span><br />
-        <select asp-for="Color4" asp-items="Html.GetEnumSelectList<Color>()"></select>
-        <span asp-validation-for="Color4"></span>
+        <div class="form-group">
+            <label class="col-form-label" for="Player1">Player 1</label>
+            <input class="form-control" asp-for="Player1Name" placeholder="Nickname">
+            <span asp-validation-for="Player1Name" style="color: #d9534f; font-size:80%"></span>
+
+            <select class="form-control" asp-for="Color1" asp-items="Html.GetEnumSelectList<Color>()"></select>
+            <span asp-validation-for="Color1" style="color: #d9534f; font-size:80%"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="Player2">Player 2</label>
+            <input class="form-control" asp-for="Player2Name" placeholder="Nickname">
+            <span asp-validation-for="Player2Name" style="color: #d9534f; font-size:80%"></span>
+
+            <select class="form-control" asp-for="Color2" asp-items="Html.GetEnumSelectList<Color>()"></select>
+            <span asp-validation-for="Color2" style="color: #d9534f; font-size:80%"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="Player3">Player 3</label>
+            <input class="form-control" asp-for="Player3Name" placeholder="Nickname">
+            <span asp-validation-for="Player3Name" style="color: #d9534f; font-size:80%"></span>
+
+            <select class="form-control" asp-for="Color3" asp-items="Html.GetEnumSelectList<Color>()"></select>
+            <span asp-validation-for="Color3" style="color: #d9534f; font-size:80%"></span>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="Player4">Player 4</label>
+            <input class="form-control" asp-for="Player4Name" placeholder="Nickname">
+            <span asp-validation-for="Player4Name" style="color: #d9534f; font-size:80%"></span>
+
+            <select class="form-control" asp-for="Color4" asp-items="Html.GetEnumSelectList<Color>()"></select>
+            <span asp-validation-for="Color4" style="color: #d9534f; font-size:80%"></span>
+        </div>
     </div><br />
     <button type="submit" class="btn btn-outline-primary" asp-controller="Ludo" asp-action="CreateGame">Start game</button>
 </form>

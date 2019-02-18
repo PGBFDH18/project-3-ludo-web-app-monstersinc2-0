@@ -8,9 +8,9 @@ When you enter the Play Ludo section of the WebAPP, you will be able to step int
 
 ##### The game
 
-To create the visual game, we first decided to go with the teachers example files that included a HTML-page and some CSS-files. Our first approach was to get the game working by writing JavaScript code, but pretty soon we realized that we didn't have the skills for it or time to learn a whole new language, and since this course is for ***back-end*** web development, we abandoned this and decided to go with a Razor page, combining HTML and C#. Unfortunately, this approach forced the page to reload every time we made a move, but again, this is back-end so we went with it anyway.
+To create the visual game, we had a look at the provided example files containing a HTML and some CSS files that, put together, resulted in a fancy LudoBoard. To actually play the game and make things happen in this HTML document, we discussed several technical approaches such as JavaScript, jQuery, SIgnalR, but due to lack of time and our choices of focus points, we decided to go with a full feathered bootstrap clothed Razor page.
 
-After hours and hours of trying to make things work visually, we abandoned this approach as well and finally we settled with some bootstrap-styled "cards" for the players, including statistics for each game piece. We also threw in an extra card presenting current player, the ability to roll the die, latest roll and also it will present the winner, when there is one.
+When a game opens (new or already started) a model with the needed data will be provided to the Razor page. This page will be painted depending on what data it gets from the model. When a move or roll is done in the game, the controllers action will call the API and reload the page with the new data, returned from the API.
 
 #### Stats
 

@@ -20,7 +20,10 @@
     @*<link rel="stylesheet" href="~/css/site.css" />*@
 </head>
 <body>
-    <partial name="_NavBar" />
+    <header>
+        <partial name="_NavBar" />
+    </header>
+
     <div class="container">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
@@ -28,7 +31,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted fixed-bottom">
         <div class="container">
             &copy; @DateTime.Now.Year - Ludo - by Monsters Inc
         </div>

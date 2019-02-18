@@ -172,6 +172,5 @@ namespace WebApp.Controllers
 
             return View("Game", model);
         }
-
     }
 }

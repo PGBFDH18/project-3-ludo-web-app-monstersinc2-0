@@ -24,14 +24,14 @@
         <partial name="_NavBar" />
     </header>
 
-    <div class="container">
+    <div class="container" style="padding-bottom: 30px; padding-top: 50px">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted fixed-bottom">
+    <footer class="border-top footer text-muted fixed-bottom" style="background-color: #343a40">
         <div class="container">
             &copy; @DateTime.Now.Year - Ludo - by Monsters Inc
         </div>

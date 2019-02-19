@@ -9,8 +9,6 @@ namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        List<Guid> sessionIds = new List<Guid> { };
-
         public IActionResult Index()
         {
             return View();

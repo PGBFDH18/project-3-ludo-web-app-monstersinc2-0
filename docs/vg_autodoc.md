@@ -7,6 +7,6 @@
 
 ### Result 
 A rendered documentation is ready and can be even checked at a local host port http://localhost:5080/api/ as show in the following screen shots: 
-![WyamDocs](wyam1.jpg)
+![WyamDocs](img/wyam1.jpg)
 
-![WyamDocs](wyam.jpg)
+![WyamDocs](img/wyam.jpg)

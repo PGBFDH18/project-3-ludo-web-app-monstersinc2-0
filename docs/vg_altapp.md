@@ -10,3 +10,5 @@ Is another NuGet package that facilitate the parsing of JSON received data from 
 
 ### Main Program 
 In the program file all main logic that displayed the user is written. 
+
+![ConsoleLudoGame](img/ConsoleLudoGame.jpg)

@@ -16,5 +16,5 @@ Link for the Application on Azure
 
 ---
 screen shots
-![CI](CI.jpg)
-![CD](CD.jpg)
+![CI](img/CI.jpg)
+![CD](img/CD.jpg)

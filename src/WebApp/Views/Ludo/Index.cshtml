@@ -1,38 +1,39 @@
-﻿@{
-    ViewData["Title"] = "Play Ludo";
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = localizer["Play Ludo"];
 
 }
 
-@model ILudoGameAPIProccessor
-@{ Dictionary<int, LudoGame> games = Model.GetActiveGames();}
+@model Dictionary<int, LudoGame>
 
-<h1>Play Ludo</h1>
-<p class="h4">Choose your game or <a asp-controller="Ludo" asp-action="NewForm">Create a new game</a>!</p>
+<h1>@localizer["Play Ludo"]</h1>
+<p class="h4">@localizer["Choose your game or"] <a asp-controller="Ludo" asp-action="NewForm">@localizer["Create a new game"]</a>!</p>
 
-@if (games != null)
+@if (Model != null)
 {
     <table class="table table-hover">
         <thead>
             <tr class="table-dark">
-                <th scope="col">Game ID</th>
-                <th scope="col">Player 1</th>
-                <th scope="col">Player 2</th>
-                <th scope="col">Player 3</th>
-                <th scope="col">Player 4</th>
+                <th scope="col">@localizer["Game"] ID</th>
+                <th scope="col">@localizer["Player"] 1</th>
+                <th scope="col">@localizer["Player"] 2</th>
+                <th scope="col">@localizer["Player"] 3</th>
+                <th scope="col">@localizer["Player"] 4</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var pair in games)
+            @foreach (var pair in Model)
             {
                 if (pair.Value._gameState != "2")
                 {
-                <tr class="table-secondary" onclick="location.href = '@Url.Action("Index", "Ludo", new { gameID = pair.Key })'" style="cursor:pointer">
-                    <th scope="row">@pair.Key</th>
-                    @foreach (var p in pair.Value._players)
-                    {
-                        <td>@p.Name</td>
-                    }
-                </tr>
+                    <tr class="table-secondary" onclick="location.href = '@Url.Action("Index", "Ludo", new { gameID = pair.Key })'" style="cursor:pointer">
+                        <th scope="row">@pair.Key</th>
+                        @foreach (var p in pair.Value._players)
+                        {
+                            <td>@p.Name</td>
+                        }
+                    </tr>
                 }
             }
         </tbody>
@@ -41,5 +42,5 @@
 else
 {
     <br />
-    <p class="h4">There is no active games.</p>
+    <p class="h4">@localizer["No active games"]</p>
 }

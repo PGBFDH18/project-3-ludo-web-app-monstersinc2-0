@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,7 +36,7 @@
 
     <footer class="border-top footer text-muted fixed-bottom" style="background-color: #343a40">
         <div class="container">
-            &copy; @DateTime.Now.Year - Ludo - by Monsters Inc
+            &copy; @DateTime.Now.Year - @localizer["Sign"]
         </div>
     </footer>
 

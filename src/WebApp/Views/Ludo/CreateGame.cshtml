@@ -1,53 +1,54 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
 @{
-    ViewData["Title"] = "CreateGame";
+    ViewData["Title"] = localizer["CreateGame"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @model PlayerBindingModel
 
 
-<h1>Create new game</h1>
-<h3>Enter NickName to add new player</h3>
-<p>At least two players are required for a game of Ludo.</p>
+<h1>@localizer["CreateGame"]</h1>
+<h3>@localizer["text2"]</h3>
+<p>@localizer["text3"]</p>
 <img src="~/img/Ludo.jpg" alt="LudoGamePhoto" height="150" width="200" />
 
 <form asp-controller="Ludo" asp-action="CreateGame">
     <div class="w-25">
         <div class="form-group">
-            <label class="col-form-label" for="Player1">Player 1</label>
-            <input class="form-control" asp-for="Player1Name" placeholder="Nickname">
+            <label class="col-form-label" for="Player1">@localizer["Player"] 1</label>
+            <input class="form-control" asp-for="Player1Name" placeholder="@localizer["Nickname"]">
             <span asp-validation-for="Player1Name" style="color: #d9534f; font-size:80%"></span>
 
             <select class="form-control" asp-for="Color1" asp-items="Html.GetEnumSelectList<Color>()"></select>
             <span asp-validation-for="Color1" style="color: #d9534f; font-size:80%"></span>
         </div>
         <div class="form-group">
-            <label class="col-form-label" for="Player2">Player 2</label>
-            <input class="form-control" asp-for="Player2Name" placeholder="Nickname">
+            <label class="col-form-label" for="Player2">@localizer["Player"] 2</label>
+            <input class="form-control" asp-for="Player2Name" placeholder="@localizer["Nickname"]">
             <span asp-validation-for="Player2Name" style="color: #d9534f; font-size:80%"></span>
 
             <select class="form-control" asp-for="Color2" asp-items="Html.GetEnumSelectList<Color>()"></select>
             <span asp-validation-for="Color2" style="color: #d9534f; font-size:80%"></span>
         </div>
         <div class="form-group">
-            <label class="col-form-label" for="Player3">Player 3</label>
-            <input class="form-control" asp-for="Player3Name" placeholder="Nickname">
+            <label class="col-form-label" for="Player3">@localizer["Player"] 3</label>
+            <input class="form-control" asp-for="Player3Name" placeholder="@localizer["Nickname"]">
             <span asp-validation-for="Player3Name" style="color: #d9534f; font-size:80%"></span>
 
             <select class="form-control" asp-for="Color3" asp-items="Html.GetEnumSelectList<Color>()"></select>
             <span asp-validation-for="Color3" style="color: #d9534f; font-size:80%"></span>
         </div>
         <div class="form-group">
-            <label class="col-form-label" for="Player4">Player 4</label>
-            <input class="form-control" asp-for="Player4Name" placeholder="Nickname">
+            <label class="col-form-label" for="Player4">@localizer["Player"] 4</label>
+            <input class="form-control" asp-for="Player4Name" placeholder="@localizer["Nickname"]">
             <span asp-validation-for="Player4Name" style="color: #d9534f; font-size:80%"></span>
 
             <select class="form-control" asp-for="Color4" asp-items="Html.GetEnumSelectList<Color>()"></select>
             <span asp-validation-for="Color4" style="color: #d9534f; font-size:80%"></span>
         </div>
     </div><br />
-    <button type="submit" class="btn btn-outline-primary" asp-controller="Ludo" asp-action="CreateGame">Start game</button>
+    <button type="submit" class="btn btn-outline-primary" asp-controller="Ludo" asp-action="CreateGame">@localizer["StartGame"]</button>
 </form>
 
 @* Used to validate user entry from a client side by JavaScript*@

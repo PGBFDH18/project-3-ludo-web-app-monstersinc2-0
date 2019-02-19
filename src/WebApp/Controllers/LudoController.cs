@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using WebApp.Models;
 using WebApp.Models.ApplicationModel;
@@ -15,7 +19,8 @@ namespace WebApp.Controllers
         /// <param name="ludoProccessor"></param>
         /// <param name="extractor"></param>
         /// <param name="log"></param>
-        public LudoController(ILudoGameAPIProccessor ludoProccessor, IPlayerFormExtractor extractor, ILogger<LudoController> log)
+        public LudoController(ILudoGameAPIProccessor ludoProccessor, IPlayerFormExtractor extractor, 
+            ILogger<LudoController> log)
         {
             _ludoProccessor = ludoProccessor;
             _extractor = extractor;
@@ -26,22 +31,33 @@ namespace WebApp.Controllers
         private ILudoGameAPIProccessor _ludoProccessor { get; }
         private IPlayerFormExtractor _extractor { get; }
 
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
+        }
+
         /// <summary>
         /// Retruns an unvalidated new empty form to fill by user
         /// </summary>
         /// <returns>Index view</returns>
-
-        [Route("Ludo")]
+        [Route("Ludo/")]
         [Route("Ludo/{gameID}")]
         public IActionResult Index(int? gameID)
         {
             if (gameID == null)
             {
-                return View(_ludoProccessor);
+                return View(_ludoProccessor.GetActiveGames());
             }
 
             var model = CreateGameViewModel((int)gameID);
-
+            
             return View("Game", model);
         }
 

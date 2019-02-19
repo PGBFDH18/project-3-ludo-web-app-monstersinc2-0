@@ -1,11 +1,13 @@
-﻿@model GameViewModel
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+@model GameViewModel
 
 @{
-    ViewData["Title"] = "Ludo - Game ID: " + Model.GameID;
+    ViewData["Title"] = localizer["Gameid", Model.GameID];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Ludo Game ID: @Model.GameID</h1>
+<h1>@localizer["Gameid", Model.GameID]</h1>
 
 <div class="row">
     @{string[] colors = new string[] { "danger", "success", "info", "warning" }; }
@@ -24,15 +26,15 @@
                                            asp-route-gameID="@(Model.GameID)" asp-route-roll="@(Model.CurrentDieRoll)" asp-route-currentPlayer="@(Model.CurrentPlayerID)">
                                             <div class="card bg-@colors[int.Parse(player.PlayerColor)] mb-3" style="max-width: 50rem; color: white">
                                                 <p class="mb-0 h5">@(piece.PieceId + 1)</p>
-                                                <p class="mb-0">Position: @piece.Position</p>
+                                                <p class="mb-0">@localizer["Position"]: @piece.Position</p>
                                                 @if (piece.Position > 55)
-                                                {<p class="mb-0">Goal</p>}
+                                                {<p class="mb-0">@localizer["Goal"]</p>}
                                                 else if (piece.Position > 50)
-                                                {<p class="mb-0">GoalPath</p>}
+                                                {<p class="mb-0">@localizer["GoalPath"]</p>}
                                                 else if (piece.Position > 0)
-                                                {<p class="mb-0">InGame</p>}
+                                                {<p class="mb-0">@localizer["InGame"]</p>}
                                                 else
-                                                {<p class="mb-0">HomeArea</p> }
+                                                {<p class="mb-0">@localizer["HomeArea"]</p>}
                                             </div>
                                         </a>
                                     }
@@ -40,15 +42,15 @@
                                     {
                                         <div class="card bg-@colors[int.Parse(player.PlayerColor)] mb-3" style="max-width: 50rem">
                                             <p class="mb-0 h5">@(piece.PieceId + 1)</p>
-                                            <p class="mb-0">Position: @piece.Position</p>
+                                            <p class="mb-0">@localizer["Position"]: @piece.Position</p>
                                             @if (piece.Position > 55)
-                                            {<p class="mb-0">Goal</p>}
+                                            {<p class="mb-0">@localizer["Goal"]</p>}
                                             else if (piece.Position > 50)
-                                            {<p class="mb-0">GoalPath</p>}
+                                            {<p class="mb-0">@localizer["GoalPath"]</p>}
                                             else if (piece.Position > 0)
-                                            {<p class="mb-0">InGame</p>}
+                                            {<p class="mb-0">@localizer["InGame"]</p>}
                                             else
-                                            {<p class="mb-0">HomeArea</p>}
+                                            {<p class="mb-0">@localizer["HomeArea"]</p>}
                                         </div>
                                     }
                                 }}
@@ -75,25 +77,25 @@
 <div class="card border-primary mb-3" style="max-width: 20rem;">
     @if (Model.Winner != null)
     {
-        <div class="card-header"><h3>@Model.Winner.Name.ToUpper() WON!</h3></div>
+        <div class="card-header"><h3>@Model.Winner.Name.ToUpper() @localizer["WON"]!</h3></div>
         <div class="card-body">
-            <h1 class="card-title">Congrats!</h1>
-                <p class="card-text">Please see the <a asp-controller="Ludo" asp-action="Stats">Stats</a> page to view former winners!</p>
+            <h1 class="card-title">@localizer["Congrats"]!</h1>
+            <p class="card-text">@localizer["Please"] <a asp-controller="Ludo" asp-action="Stats">@localizer["Stats"]</a> @localizer["toview"]!</p>
         </div>
     }
     else
     {
-        <div class="card-header"><h3>@Model.Players[Model.CurrentPlayerID].Name's turn!</h3></div>
+        <div class="card-header"><h3>@Model.Players[Model.CurrentPlayerID].Name@localizer["turn"]!</h3></div>
         <div class="card-body">
-            <h1 class="card-title">Latest roll: @(Model.CurrentDieRoll)</h1>
+            <h1 class="card-title">@localizer["LatestRoll"]: @(Model.CurrentDieRoll)</h1>
             @if (Model.TimeToMove)
             {
-                <p class="card-text">Click the piece you want to move!</p>
-                <p class="card-text">You can only move your own piece.</p>
+                <p class="card-text">@localizer["Click"]!</p>
+                <p class="card-text">@localizer["MoveOwn"].</p>
             }
             else
             {
-                <p class="card-text">Click the button to roll the die!</p>
+                <p class="card-text">@localizer["ClickRoll"]!</p>
             }
         </div>
     }
@@ -102,10 +104,10 @@
 @if (!Model.TimeToMove && Model.Winner == null)
 {
     <a asp-controller="Ludo" asp-action="RollDie" asp-route-gameID="@(Model.GameID)">
-        <button type="button" class="btn btn-primary">ROLL DIE</button>
+        <button type="button" class="btn btn-primary">@localizer["RollDie"]</button>
     </a>
 }
 else
 {
-    <button type="button" class="btn btn-primary disabled">ROLL DIE</button>
+    <button type="button" class="btn btn-primary disabled">@localizer["RollDie"]</button>
 }

@@ -1,22 +1,23 @@
-﻿
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
 @{
-    ViewData["Title"] = "Manual";
+    ViewData["Title"] = localizer["Manual"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Manual</h1>
+<h1>@localizer["Manual"]</h1>
 
 <div class="jumbotron">
-    <h1 class="display-4">How to play Ludo!</h1>
+    <h1 class="display-4">@localizer["ManualTitle"]!</h1>
     <p class="lead">
-        To start a new game, hit the "Play Ludo" link in the navigation bar. On the next page, click on "Create a new game".<br />
-        Enter the nicknames of the players (at least 2) and choose your preferred color. Press the START GAME-button.
+        @localizer["Lead1"]<br />
+        @localizer["Lead2"]
     </p>
 
     <hr class="my-4">
-    <p>The first thing you'll see after creating a new game is a game board containing cards for each player. Every player has four game pieces and every piece is informing the player of current status. Every player also has an indicator at the bottom of the card presenting how far the pieces have come.</p>
+    <p>@localizer["Text1"]</p>
     <img class="img-fluid" src="~/img/screendump1.PNG" />
-    <p>Under all the player’s cards, you’ll find another card containing information about whose turn it is and what the latest roll is. This card will also announce when a winner is declared.</p>
+    <p>@localizer["Text2"]</p>
 
     <hr class="my-4">
     <div class="row">
@@ -24,8 +25,8 @@
             <img class="img-fluid" src="~/img/screendump2.PNG" />
         </div>
         <div class="col-lg-4">
-            <p>In this example, Brad will start by rolling the die with the “ROLL DIE”-button. As you can see in the first picture, he rolls a value of 3 and gets to choose which piece he wants to move.</p>
-            <p>In this case, he starts the game by moving piece number 2, as you can see in the piece section and in the indicator.</p>
+            <p>@localizer["Text3"]</p>
+            <p>@localizer["Text4"]</p>
         </div>
         <div class="col-lg-4">
             <img class="img-fluid" src="~/img/screendump3.PNG" />
@@ -33,16 +34,16 @@
     </div>
 
     <hr class="my-4">
-    <p>The game goes on from player to player and after a while the game board can look something like this:</p>
+    <p>@localizer["Text5"]</p>
     <img class="img-fluid" src="~/img/screendump4.PNG" />
 
     <hr class="my-4">
-    <p>When a player gets all pieces in goal, he or she will be announced as winner of the game and the game is finished. You will also be asked to visit the Stats page to view former winners and how many games they’ve won.</p>
+    <p>@localizer["Text6"]</p>
     <img class="img-fluid" src="~/img/screendump5.PNG" />
-    <h1 class="display-4">Enjoy!</h1>
+    <h1 class="display-4">@localizer["GoodLuck"]!</h1>
 
     <hr class="my-4">
     <p class="lead">
-        <a class="btn btn-primary btn-lg" asp-controller="Ludo" asp-action="NewForm" role="button">Create a new game</a>
+        <a class="btn btn-primary btn-lg" asp-controller="Ludo" asp-action="NewForm" role="button">@localizer["CreateGame"]</a>
     </p>
 </div>

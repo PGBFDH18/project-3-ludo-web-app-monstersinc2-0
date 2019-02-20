@@ -121,6 +121,19 @@
     <value>Integritet</value>
   </data>
   <data name="Text" xml:space="preserve">
-    <value>Den här webbsidan använder inga kakor för tillfället.</value>
+    <value>Kakor (”cookies”)
+För att få den här webbplatsen att fungera ordentligt skickar vi ibland små filer till din dator. Dessa filer kallas kakor eller ”cookies”. De flesta större webbplatser gör på samma sätt.
+Vad är kakor?
+Kakorna är små textfiler som sparas på din dator, telefon eller surfplatta när du besöker webbplatsen. Kakorna hjälper webbplatsen att komma ihåg dina inställningar (t.ex. användarnamn, språk, textstorlek och andra förhandsval) under en viss tid. Tanken är att du inte ska behöva göra om inställningarna varje gång du går in på webbplatsen eller bläddrar mellan olika sidor. 
+Hur använder vi kakorna?
+• Vi använder cookies för att identifiera användarens kulturval för att presentera informationen på rätt språk.
+• Den här kakan är viktig för att ge användaren en bra upplevelse
+• Vi använder första kakan och de är av typ permanent 
+• Vårt företag har full kontroll över informationen som skickas med cookies.
+• Vi anger att kakorna inte kommer att användas för några ytterligare ändamål än vad som nämnts ovan
+• Du kan avvisa kakan genom att inte trycka på acceptera i cookievarningsbannern.
+
+Hur du kan kontrollera kakorna
+Du kan kontrollera och radera kakor precis som du vill. Läs mer på aboutcookies.org.  Du kan ta bort alla kakor som finns på din dator och du kan ställa in webbläsaren så att den inte tar emot några kakor. I så fall måste du eventuellt göra om vissa inställningar varje gång du går in på en webbplats och vissa tjänster och funktioner kanske inte fungerar.</value>
   </data>
 </root>

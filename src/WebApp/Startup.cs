@@ -37,25 +37,25 @@ namespace WebApp
             services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
 
             services.Configure<RequestLocalizationOptions>(opts =>
-       {
-           var supportedCultures = new List<CultureInfo>
-           {
-                new CultureInfo("en"),
-                new CultureInfo("sv")
-           };
+            {
+                var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("sv")
+                };
 
-           opts.DefaultRequestCulture = new RequestCulture("en");
-           // Formatting numbers, dates, etc.
-           opts.SupportedCultures = supportedCultures;
-           // UI strings that we have localized.
-           opts.SupportedUICultures = supportedCultures;
-       });
+                opts.DefaultRequestCulture = new RequestCulture("en");
+                // Formatting numbers, dates, etc.
+                opts.SupportedCultures = supportedCultures;
+                // UI strings that we have localized.
+                opts.SupportedUICultures = supportedCultures;
+            });
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization();
 
-       
+
 
             services.AddScoped<ILudoGameAPIProccessor, LudoGameAPIProccessor>();
             services.AddTransient<IPlayerFormExtractor, PlayerFormExtractor>();
@@ -89,7 +89,7 @@ namespace WebApp
                 SupportedUICultures = supportedCultures,
                 SupportedCultures = supportedCultures
             });
-            
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

@@ -1,3 +1,4 @@
-Put your documentation in this folder!
+The Webserver link at Azure
 
-You can delete this file
+https://ludogameapp.azurewebsites.net/
+

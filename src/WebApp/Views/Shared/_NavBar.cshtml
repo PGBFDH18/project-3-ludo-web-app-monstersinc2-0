@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed; width:100%">
+    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Ludo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@localizer["Home"] <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="navbar-nav mr-auto">
+                <a class="nav-link" asp-area="" asp-controller="Ludo" asp-action="Index">@localizer["Play Ludo"]</a>
+            </li>
+            <li class="navbar-nav mr-auto">
+                <a class="nav-link" asp-area="" asp-controller="Ludo" asp-action="Manual">@localizer["Manual"]</a>
+            </li>
+            <li class="navbar-nav mr-auto">
+                <a class="nav-link" asp-area="" asp-controller="Ludo" asp-action="Stats">@localizer["Stats"]</a>
+            </li>
+            <li class="navbar-nav mr-auto">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">@localizer["Privacy"]</a>
+            </li>
+        </ul>
+        <div class="col-sm-6 text-right">
+            @await Html.PartialAsync("_SelectLanguagePartial")
+        </div>
+    </div>
+</nav>

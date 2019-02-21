@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = localizer["Manual"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@localizer["Manual"]</h1>
+
+<div class="jumbotron">
+    <h1 class="display-4">@localizer["ManualTitle"]!</h1>
+    <p class="lead">
+        @localizer["Lead1"]<br />
+        @localizer["Lead2"]
+    </p>
+
+    <hr class="my-4">
+    <p>@localizer["Text1"]</p>
+    <img class="img-fluid" src="~/img/screendump1.PNG" />
+    <p>@localizer["Text2"]</p>
+
+    <hr class="my-4">
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="img-fluid" src="~/img/screendump2.PNG" />
+        </div>
+        <div class="col-lg-4">
+            <p>@localizer["Text3"]</p>
+            <p>@localizer["Text4"]</p>
+        </div>
+        <div class="col-lg-4">
+            <img class="img-fluid" src="~/img/screendump3.PNG" />
+        </div>
+    </div>
+
+    <hr class="my-4">
+    <p>@localizer["Text5"]</p>
+    <img class="img-fluid" src="~/img/screendump4.PNG" />
+
+    <hr class="my-4">
+    <p>@localizer["Text6"]</p>
+    <img class="img-fluid" src="~/img/screendump5.PNG" />
+    <h1 class="display-4">@localizer["GoodLuck"]!</h1>
+
+    <hr class="my-4">
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" asp-controller="Ludo" asp-action="NewForm" role="button">@localizer["CreateGame"]</a>
+    </p>
+</div>

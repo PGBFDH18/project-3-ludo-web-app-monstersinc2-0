@@ -1,0 +1,248 @@
+﻿@{
+    Layout = null;
+}
+
+@model GameViewModel
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Game</title>
+    <link href="~/css/LudoStyle.css" rel="stylesheet" />
+    <link href="~/css/reset.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/js/site.js"></script>
+</head>
+
+<body>
+    <div class="gameInfo">
+        <div class="currentPlayer">@Model.Players[Model.CurrentPlayerID].Name</div>
+        @if (!Model.TimeToMove)
+        {
+            <a asp-controller="Ludo" asp-action="RollDie" asp-route-gameID="@Model.GameID">
+                <div class="dice">
+                    @* Paints a die with correct number of dots depending on diceRoll. *@
+                    @switch (Model.CurrentDieRoll)
+                    {
+                        case 1:
+                            <div class="diceDot" id="center"></div>
+                            break;
+                        case 2:
+                            <div class="diceDot" id="leftUpper"></div>
+                            <div class="diceDot" id="rightLower"></div>
+                            break;
+                        case 3:
+                            <div class="diceDot" id="leftUpper"></div>
+                            <div class="diceDot" id="center"></div>
+                            <div class="diceDot" id="rightLower"></div>
+                            break;
+                        case 4:
+                            <div class="diceDot" id="leftUpper"></div>
+                            <div class="diceDot" id="rightUpper"></div>
+                            <div class="diceDot" id="leftLower"></div>
+                            <div class="diceDot" id="rightLower"></div>
+                            break;
+                        case 5:
+                            <div class="diceDot" id="leftUpper"></div>
+                            <div class="diceDot" id="rightUpper"></div>
+                            <div class="diceDot" id="center"></div>
+                            <div class="diceDot" id="leftLower"></div>
+                            <div class="diceDot" id="rightLower"></div>
+                            break;
+                        case 6:
+                            <div class="diceDot" id="leftUpper"></div>
+                            <div class="diceDot" id="leftMiddel"></div>
+                            <div class="diceDot" id="leftLower"></div>
+                            <div class="diceDot" id="rightUpper"></div>
+                            <div class="diceDot" id="rightMiddel"></div>
+                            <div class="diceDot" id="rightLower"></div>
+                            break;
+                        default:
+                            <p>Click to roll</p>
+                            break;
+                    }
+                </div>
+            </a>
+        }
+        else
+        {
+            <div class="dice">
+                @* Paints a die with correct number of dots depending on diceRoll. *@
+                @switch (Model.CurrentDieRoll)
+                {
+                    case 1:
+                        <div class="diceDot" id="center"></div>
+                        break;
+                    case 2:
+                        <div class="diceDot" id="leftUpper"></div>
+                        <div class="diceDot" id="rightLower"></div>
+                        break;
+                    case 3:
+                        <div class="diceDot" id="leftUpper"></div>
+                        <div class="diceDot" id="center"></div>
+                        <div class="diceDot" id="rightLower"></div>
+                        break;
+                    case 4:
+                        <div class="diceDot" id="leftUpper"></div>
+                        <div class="diceDot" id="rightUpper"></div>
+                        <div class="diceDot" id="leftLower"></div>
+                        <div class="diceDot" id="rightLower"></div>
+                        break;
+                    case 5:
+                        <div class="diceDot" id="leftUpper"></div>
+                        <div class="diceDot" id="rightUpper"></div>
+                        <div class="diceDot" id="center"></div>
+                        <div class="diceDot" id="leftLower"></div>
+                        <div class="diceDot" id="rightLower"></div>
+                        break;
+                    case 6:
+                        <div class="diceDot" id="leftUpper"></div>
+                        <div class="diceDot" id="leftMiddel"></div>
+                        <div class="diceDot" id="leftLower"></div>
+                        <div class="diceDot" id="rightUpper"></div>
+                        <div class="diceDot" id="rightMiddel"></div>
+                        <div class="diceDot" id="rightLower"></div>
+                        break;
+                    default:
+                        <p>Click to roll</p>
+                        break;
+                }
+            </div>
+        }
+    </div>
+
+    <div class="board">
+        @* Paints all four wings and pieces, if their positions says so.*@
+        @for (int i = 0; i < 4; i++)
+        {
+            string wingID = null;
+            int startPos = 0;
+            int endPos = 0;
+            int[] playerBricks = null;
+
+            if (i == 0)
+            {
+                wingID = "bottomWing";
+                startPos = 55;
+                endPos = 72;
+                playerBricks = new int[] { 56, 62, 66 };
+            }
+
+            if (i == 1)
+            {
+                wingID = "leftWing";
+                startPos = 1;
+                endPos = 18;
+                playerBricks = new int[] { 2, 8, 12 };
+            }
+
+            if (i == 2)
+            {
+                wingID = "rightWing";
+                startPos = 37;
+                endPos = 54;
+                playerBricks = new int[] { 38, 44, 48 };
+            }
+
+            if (i == 3)
+            {
+                wingID = "topWing";
+                startPos = 19;
+                endPos = 36;
+                playerBricks = new int[] { 20, 26, 30 };
+            }
+
+            <div class="wing" id="@wingID">
+                @for (int j = startPos; j <= endPos; j++)
+                {
+                    bool painted = false;
+
+                    while (!painted && i < Model.Players.Count)
+                    {
+                        foreach (var player in Model.Players)
+                        {
+                            foreach (var piece in player.Pieces)
+                            {
+                                if (player.Pattern[piece.Position] == j)
+                                {
+                                    string brickID = "p" + i + "b" + piece.PieceId;
+
+                                    if (Model.TimeToMove && i == Model.CurrentPlayerID)
+                                    {
+                                        <a asp-controller="Ludo" asp-action="MovePiece" asp-route-pieceID="@(piece.PieceId)"
+                                           asp-route-gameID="@(Model.GameID)" asp-route-roll="@(Model.CurrentDieRoll)" asp-route-currentPlayer="@(Model.CurrentPlayerID)">
+                                            <div class="field" id="@brickID">
+                                                <div class="brick player@(i)">@(j)</div>
+                                            </div>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <div class="field" id="@brickID">
+                                            <div class="brick player@(i) ">@(j)</div>
+                                        </div>
+                                    }
+                                    painted = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!painted && j == playerBricks[0] || j >= playerBricks[1] && j <= playerBricks[2])
+                        {
+                            <div class="field player@(i + 1)" id="@j">@j</div>
+                            break;
+                        }
+                        else if (!painted)
+                        {
+                            <div class="field" id="@j">@j</div>
+                            break;
+                        }
+                    }
+                }
+            </div>
+
+            <div class="start player@(i + 1)" id="base@(i + 1)">
+                @if (i < Model.Players.Count)
+                {
+                    foreach (var p in Model.Players[i].Pieces)
+                    {
+                        if (p.Position == 0)
+                        {
+                            string brickID = "p" + i + "b" + (p.PieceId);
+
+                            if (Model.TimeToMove && Model.Players[i].PlayerId == Model.CurrentPlayerID)
+                            {
+                                <a asp-controller="Ludo" asp-action="MovePiece" asp-route-pieceID="@(p.PieceId)"
+                                   asp-route-gameID="@(Model.GameID)" asp-route-roll="@(Model.CurrentDieRoll)" asp-route-currentPlayer="@(Model.CurrentPlayerID)">
+                                    <div class="field" id="@brickID">
+                                        <div class="brick player@(i + 1)"></div>
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="field" id="@brickID">
+                                    <div class="brick player@(i + 1)"></div>
+                                </div>
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        string brickID = "p" + (i) + "b" + (j);
+                        <div class="field" id="@brickID">
+                            <div class="brick player@(i + 1)"></div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+</body>
+
+</html>

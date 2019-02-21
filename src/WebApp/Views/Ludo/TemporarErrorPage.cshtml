@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = localizer["Title"];
+}
+
+@*This view is used to render a friendly page for the user in case the Connectoin to the API lost and the game can't be played*@
+
+<div class="jumbotron">
+    <h1 class="display-4">@localizer["Title"]</h1>
+    <p>@localizer["p1"]</p>
+    <p>@localizer["p2"]</p>
+    <p>@localizer["p3"]</p>
+    <img class="img-fluid" src="~/img/panda.jpg" width="650" height="500" style="align-content: center"/>
+</div>
+

@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer localizer
+@{
+    ViewData["Title"] = localizer["Privacy"];
+}
+
+<h1>@localizer["Privacy"]</h1>
+
+<div>
+    <p>@localizer["p1"]</p>
+    <h3>@localizer["h1"]</h3>
+    <p>@localizer["p2"]</p>
+    <h3>@localizer["h2"]</h3>
+    <ul>
+        <li>
+            @localizer["li1"]
+        </li>
+        <li>
+            @localizer["li2"]
+        </li>
+        <li>
+            @localizer["li3"]
+        </li>
+        <li>
+            @localizer["li4"]
+        </li>
+        <li>
+            @localizer["li5"]
+        </li>
+        <li>
+            @localizer["li6"]
+        </li>
+    </ul>
+    <h3>@localizer["h3"]</h3>
+    <p>@localizer["p3"]</p>
+</div>

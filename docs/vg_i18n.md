@@ -2,7 +2,7 @@
 
 In this project, we decided to use internationalization to reach younger people in more countries. In ConfigureServices we used AddLocaliztion and then Configure<RequestLocalizationOptions> to populate a List<CultureInfo> with supported languages. Also, to set the DefaultRequestCulture to English.
 
-![i18n3](img\i18n3.png)
+![i18n3](img/i18n3.png)
 
 In Configure we added the app.UseRequestLocalization.
 
@@ -24,6 +24,6 @@ We could then call the @localizer to get what we wanted:
 
 And here are some screen shots of the actual web app, in the Manual section:
 
-![i18n1](img\i18n1.png)
+![i18n1](img/i18n1.png)
 
-![i18n2](img\i18n2.png)
+![i18n2](img/i18n2.png)
